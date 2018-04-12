@@ -3,6 +3,7 @@ package com.fullofinspiration.github;
 import java.util.ArrayList;
 
 /**
+ * 我的代码和leetcode中的答案基本相同
  * z字形转换
  */
 public class ZigzagConversion {
