@@ -4,6 +4,10 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * 去重复判断很繁琐，首先在第一个for循环做第一个数字必须为非重复值，然后在while循环中，如果
+ * 有满足条件的值，为了保证第二个值也是非重复的，还要做第二个值是非重复的判断
+ */
 public class ThreeSum {
     public List<List<Integer>> threeSum(int[] num) {
         Arrays.sort(num);
