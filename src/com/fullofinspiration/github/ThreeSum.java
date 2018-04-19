@@ -13,6 +13,7 @@ public class ThreeSum {
         Arrays.sort(num);
         List<List<Integer>> res = new LinkedList<>();
         for (int i = 0; i < num.length - 2; i++) {
+            //因为此算法是三个数相加为0
             if (num[i] > 0) break;
             if (i == 0 || num[i] != num[i - 1]) {
                 int lo = i + 1, hi = num.length - 1, sum = -num[i];
