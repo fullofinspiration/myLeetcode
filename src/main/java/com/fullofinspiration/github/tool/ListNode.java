@@ -1,4 +1,4 @@
-package com.fullofinspiration.github.leetcode.tool;
+package com.fullofinspiration.github.tool;
 
 public class ListNode {
     public int val;

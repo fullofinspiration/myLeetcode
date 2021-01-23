@@ -1,6 +1,6 @@
 package com.fullofinspiration.github.leetcode;
 
-import com.fullofinspiration.github.leetcode.tool.ListNode;
+import com.fullofinspiration.github.tool.ListNode;
 
 /**
  * 只需遍历一遍，一开始我写的时候是遍历两遍，这个需要记住两点，一个是早点的节点和晚点
