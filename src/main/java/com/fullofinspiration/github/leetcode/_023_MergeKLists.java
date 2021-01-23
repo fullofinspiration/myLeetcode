@@ -1,6 +1,6 @@
-package com.fullofinspiration.github;
+package com.fullofinspiration.github.leetcode;
 
-import com.fullofinspiration.github.tool.ListNode;
+import com.fullofinspiration.github.leetcode.tool.ListNode;
 
 import java.util.Arrays;
 import java.util.LinkedList;

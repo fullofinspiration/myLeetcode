@@ -1,4 +1,4 @@
-package com.fullofinspiration.github;
+package com.fullofinspiration.github.leetcode;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.fullofinspiration.github.tool;
+package com.fullofinspiration.github.leetcode.tool;
 
 public class BinaryTree {
   public int number;

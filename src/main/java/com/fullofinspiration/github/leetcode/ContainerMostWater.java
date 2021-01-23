@@ -1,4 +1,4 @@
-package com.fullofinspiration.github;
+package com.fullofinspiration.github.leetcode;
 
 /**
  * 看如何能盛下最多的水

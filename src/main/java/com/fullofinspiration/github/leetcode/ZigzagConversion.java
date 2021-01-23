@@ -1,6 +1,4 @@
-package com.fullofinspiration.github;
-
-import java.util.ArrayList;
+package com.fullofinspiration.github.leetcode;
 
 /**
  * 我的代码和leetcode中的答案基本相同

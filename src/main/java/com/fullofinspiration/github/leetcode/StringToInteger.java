@@ -1,4 +1,4 @@
-package com.fullofinspiration.github;
+package com.fullofinspiration.github.leetcode;
 
 public class StringToInteger {
     public int myAtoi(String str) {

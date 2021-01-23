@@ -1,4 +1,4 @@
-package com.fullofinspiration.github;
+package com.fullofinspiration.github.leetcode;
 
 /**
  * Created by Zhenpeng Zhang on 2021/1/6.
