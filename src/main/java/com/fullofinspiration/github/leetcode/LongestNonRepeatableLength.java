@@ -1,7 +1,7 @@
 package com.fullofinspiration.github.leetcode;
 
-import java.util.Iterator;
-import java.util.LinkedHashSet;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Zhenpeng Zhang on 2021/1/23.
@@ -22,41 +22,23 @@ public class LongestNonRepeatableLength {
 
     }
 
+    /**
+     * 只需要保存是否有出现过的元素，同时和旧的最大值相对比
+     */
     public int lengthOfLongestSubString(String str) {
-        //记录老的最长记录，如果新的记录大于老的，更新记录，使用linkedHashMap
-        LinkedHashSet<Character> set = new LinkedHashSet<>();
+        Map<Character, Integer> all = new HashMap<>();
         int maxLength = 0;
+        int curStart = 0;
         if (str == null || str.length() == 0) {
             return 0;
         }
-        int curLength = 0;
-        int index = 0;
-
-        while (index < str.length()) {
-            if (set.contains(str.charAt(index))) {
-                boolean hasRemoved = false;
-                int removeCount = 0;
-                Iterator<Character> iterator = set.iterator();
-                while (iterator.hasNext()) {
-                    Character next = iterator.next();
-                    if (hasRemoved) {
-                        break;
-                    } else {
-                        removeCount++;
-                        iterator.remove();
-                        if (next.equals(str.charAt(index))) {
-                            hasRemoved = true;
-                        }
-                    }
-                }
-                curLength -= removeCount;
+        for (int index = 0; index < str.length(); index++) {
+            char curChar = str.charAt(index);
+            if (all.containsKey(curChar) && curStart <= all.get(curChar)) {
+                curStart = all.get(curChar) + 1;
             }
-            set.add(str.charAt(index));
-            curLength++;
-            if (curLength > maxLength) {
-                maxLength = curLength;
-            }
-            index++;
+            maxLength = Math.max(maxLength, index - curStart + 1);
+            all.put(curChar, index);
         }
         return maxLength;
     }
