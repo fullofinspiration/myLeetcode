@@ -1,6 +1,7 @@
 package com.fullofinspiration.github.leetcode;
 
-import com.zzp.leetcode.com.zzp.leetcode.util.BinaryTree;
+
+import com.fullofinspiration.github.tool.BinaryTree;
 
 import java.util.LinkedList;
 
