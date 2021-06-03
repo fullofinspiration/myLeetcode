@@ -7,7 +7,7 @@ import java.util.List;
  * 回溯法的典型应用（我理解的回溯法就是不停的递归）
  * 这个算法不是自己想出来的，是抄的
  */
-public class _020_GenerateParenthesis {
+public class _0020_GenerateParenthesis {
     public List<String> generateParenthesis(int n) {
         List<String> lists = new LinkedList<>();
         backtrace(lists, "", 0, 0, 0, n);
@@ -26,7 +26,7 @@ public class _020_GenerateParenthesis {
 
     }
     public static void main(String[] args) {
-        _020_GenerateParenthesis a = new _020_GenerateParenthesis();
+        _0020_GenerateParenthesis a = new _0020_GenerateParenthesis();
         List<String> lists = a.generateParenthesis(3);
         for (String list : lists)
             System.out.println(list);

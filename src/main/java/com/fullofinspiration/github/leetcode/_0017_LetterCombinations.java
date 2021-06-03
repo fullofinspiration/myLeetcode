@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public class LetterCombinations {
+public class _0017_LetterCombinations {
 
   public static void main(String[] args) {
     System.out.println(letterCombinations("23"));

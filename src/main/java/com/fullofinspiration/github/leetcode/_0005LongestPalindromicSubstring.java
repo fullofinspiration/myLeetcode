@@ -1,10 +1,11 @@
 package com.fullofinspiration.github.leetcode;
 
 /**
+ * medium
  * 1 回文可能中间有一个值，可能中间有两个值 2 如何得到最长的回文子字符（） 已经找到思路： i：1 ~ n-1 j: i+1 ~ n-1 有一个最大长度的list i递增，j递减
  * 依次比较，记录当前值 若有合适的值，break，i++ 若没有，i++ 直到遍历结束
  */
-public class LongestPalindromicSubstring {
+public class _0005LongestPalindromicSubstring {
 
   public static void main(String[] args) {
     String s =

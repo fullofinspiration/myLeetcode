@@ -3,7 +3,7 @@ package com.fullofinspiration.github.leetcode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ZigZag {
+public class _0006ZigZag {
 
   public static void main(String[] args) {
     String s = convert("PAYPALISHIRING", 3);

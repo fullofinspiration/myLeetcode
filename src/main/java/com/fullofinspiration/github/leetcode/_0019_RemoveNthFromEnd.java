@@ -1,7 +1,7 @@
 package com.fullofinspiration.github.leetcode;
 
 
-public class RemoveNthFromEnd {
+public class _0019_RemoveNthFromEnd {
 
   /**
    * 这个方法已经很简便了，但是如果加一个假的头结点，会更好的处理corner case

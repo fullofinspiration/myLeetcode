@@ -3,7 +3,7 @@ package com.fullofinspiration.github.leetcode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GenerateParenthesis {
+public class _0022_GenerateParenthesis {
 
   /**
    * 两次过，但是中间只调试了30s，我真是太牛逼了

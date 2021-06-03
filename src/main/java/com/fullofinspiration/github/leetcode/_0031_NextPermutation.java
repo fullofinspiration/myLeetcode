@@ -1,6 +1,9 @@
 package com.fullofinspiration.github.leetcode;
 
-public class NextPermutation {
+/**
+ * todo 第二次看时看不懂问题，后面再看
+ */
+public class _0031_NextPermutation {
 
   public static void main(String[] args) {
     int[] nums = {1, 2, 3};

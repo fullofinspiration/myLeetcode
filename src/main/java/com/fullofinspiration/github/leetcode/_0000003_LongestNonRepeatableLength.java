@@ -6,10 +6,10 @@ import java.util.Map;
 /**
  * Created by Zhenpeng Zhang on 2021/1/23.
  */
-public class LongestNonRepeatableLength {
+public class _0000003_LongestNonRepeatableLength {
 
     public static void main(String[] args) {
-        LongestNonRepeatableLength longestLengthCalculator = new LongestNonRepeatableLength();
+        _0000003_LongestNonRepeatableLength longestLengthCalculator = new _0000003_LongestNonRepeatableLength();
         int aab = longestLengthCalculator.lengthOfLongestSubString("aab");
         System.out.println(aab);
         int pwwkew = longestLengthCalculator.lengthOfLongestSubString("pwwkew");
