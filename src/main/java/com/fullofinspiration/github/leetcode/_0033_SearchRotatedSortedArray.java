@@ -1,6 +1,6 @@
 package com.fullofinspiration.github.leetcode;
 
-public class SearchRotatedSortedArray {
+public class _0033_SearchRotatedSortedArray {
   public static void main(String[] args) {
     int[] array = {4,5,6,7,0,1,2};
     search(array,0);
