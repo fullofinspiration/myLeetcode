@@ -1,12 +1,10 @@
 package com.fullofinspiration.github.leetcode;
 
 import java.util.HashMap;
-import java.util.IdentityHashMap;
 import java.util.Map;
 
 /**
  * easy
- * todo impl
  */
 public class _0001_TwoSum {
     class Solution {
