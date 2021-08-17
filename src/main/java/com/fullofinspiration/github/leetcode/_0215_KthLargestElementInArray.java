@@ -19,26 +19,17 @@ public class _0215_KthLargestElementInArray {
             }
         }
 
-        private int sortAndGetIndex4Low(int[] nums, int low, int high) {
-            int lowIndex = low;
-            int highIndex = high;
+        private int sortAndGetIndex4Low(int[] nums, int lowIndex, int highIndex) {
             int curVal = nums[lowIndex];
             while (lowIndex < highIndex) {
-                while (nums[highIndex] >= curVal && highIndex > low) {
+                while (nums[highIndex] >= curVal && highIndex > lowIndex) {
                     highIndex--;
                 }
-                if (highIndex <= lowIndex) {
-                    break;
-                }
-                nums[lowIndex++] = nums[highIndex];
-                while (nums[lowIndex] <= curVal && lowIndex < high) {
+                nums[lowIndex] = nums[highIndex];
+                while (nums[lowIndex] <= curVal && lowIndex < highIndex) {
                     lowIndex++;
                 }
-                if (lowIndex >= highIndex) {
-                    lowIndex = highIndex;
-                    break;
-                }
-                nums[highIndex--] = nums[lowIndex];
+                nums[highIndex] = nums[lowIndex];
             }
             nums[lowIndex] = curVal;
             return lowIndex;
