@@ -12,4 +12,9 @@ package com.fullofinspiration.github.leetcode;
  * 2 对求得结果再两两一组，求得最大值，直到汇总所有自数组为1个为止
  */
 public class _0053_MaximumSubArray {
+    class Solution {
+        public int maxSubArray(int[] nums) {
+        return 0;
+        }
+    }
 }

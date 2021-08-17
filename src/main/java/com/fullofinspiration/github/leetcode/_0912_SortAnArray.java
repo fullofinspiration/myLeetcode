@@ -25,8 +25,8 @@ public class _0912_SortAnArray {
                 nums[right] = nums[left];
             }
             nums[left] = curVal;
-            quickSort(nums, low, high - 1);
-            quickSort(nums, low + 1, high);
+            quickSort(nums, low, left - 1);
+            quickSort(nums, left + 1, high);
         }
     }
 }
