@@ -1,5 +1,7 @@
 package com.fullofinspiration.github.leetcode;
 
+import com.fullofinspiration.github.tool.ListNode;
+
 public class _0023_MergeKSortedLists {
   //一把过，我真是太牛逼了，就是运行时间长了点
   public ListNode mergeKLists(ListNode[] lists) {

@@ -1,5 +1,7 @@
 package com.fullofinspiration.github.leetcode;
 
+import com.fullofinspiration.github.tool.ListNode;
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {

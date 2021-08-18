@@ -1,9 +1,11 @@
 package com.fullofinspiration.github.leetcode;
 
+import com.fullofinspiration.github.tool.ListNode;
+
 public class TwoSortedLists {
 
   //一次过，我真是太牛逼了.
-  public static ListNode mergeTwoLists(ListNode l1,ListNode l2) {
+  public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
     ListNode head = new ListNode(0);
     ListNode curNode = head;
     while (l1 != null && l2 != null) {

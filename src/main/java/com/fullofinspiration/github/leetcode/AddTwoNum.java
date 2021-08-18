@@ -1,5 +1,7 @@
 package com.fullofinspiration.github.leetcode;
 
+import com.fullofinspiration.github.tool.ListNode;
+
 public class AddTwoNum {
 
     public static void main(String[] args) {
@@ -59,20 +61,5 @@ public class AddTwoNum {
         return firstNode;
     }
 
-}
-
-class ListNode {
-
-    int val;
-    ListNode next;
-
-    ListNode(int val) {
-        this.val = val;
-    }
-
-    ListNode(int val, ListNode next) {
-        this.val = val;
-        this.next = next;
-    }
 }
 

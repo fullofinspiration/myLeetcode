@@ -1,6 +1,8 @@
 package com.fullofinspiration.github.leetcode;
 
 
+import com.fullofinspiration.github.tool.ListNode;
+
 public class _0019_RemoveNthFromEnd {
 
   /**
@@ -9,7 +11,7 @@ public class _0019_RemoveNthFromEnd {
    * @param n
    * @return
    */
-  public static ListNode removeNthFromEnd1(ListNode head,int n) {
+  public static ListNode removeNthFromEnd1(ListNode head, int n) {
     ListNode preRemoveNode = head,lastNode = head;
     while (n >0) {
       lastNode = lastNode.next;

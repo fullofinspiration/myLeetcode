@@ -1,6 +1,7 @@
 package com.fullofinspiration.github.leetcode;
 
 
+import com.fullofinspiration.github.tool.ListNode;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

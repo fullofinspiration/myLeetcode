@@ -1,5 +1,7 @@
 package com.fullofinspiration.github.leetcode;
 
+import com.fullofinspiration.github.tool.ListNode;
+
 public class SwapPairs {
   public static void main(String[] args) {
     ListNode listNode1 = new ListNode(1);

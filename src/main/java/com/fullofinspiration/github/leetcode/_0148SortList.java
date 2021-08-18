@@ -1,5 +1,7 @@
 package com.fullofinspiration.github.leetcode;
 
+import com.fullofinspiration.github.tool.ListNode;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
