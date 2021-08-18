@@ -1,6 +1,7 @@
 package com.fullofinspiration.github.leetcode;
 
 import com.fullofinspiration.github.tool.ListNode;
+import com.fullofinspiration.github.util.ListNodeUtil;
 import org.junit.Test;
 
 public class _0021_MergeTwoSortedListTests {
@@ -8,24 +9,24 @@ public class _0021_MergeTwoSortedListTests {
 
     @Test
     public void test00() {
-        ListNode firstList = buildListNode(new int[]{1, 2, 4});
-        ListNode secondList = buildListNode(new int[]{1, 3, 4});
+        ListNode firstList = ListNodeUtil.buildListNode(new int[]{1, 2, 4});
+        ListNode secondList = ListNodeUtil.buildListNode(new int[]{1, 3, 4});
         ListNode result = SOLUTION.mergeTwoLists(firstList, secondList);
-        ListNode excepted = buildListNode(new int[]{1, 1, 2, 3, 4, 4});
+        ListNode excepted = ListNodeUtil.buildListNode(new int[]{1, 1, 2, 3, 4, 4});
         assertIsEqual(excepted, result);
     }
 
     @Test
     public void test01() {
-        ListNode result = SOLUTION.mergeTwoLists(buildListNode(new int[]{}), buildListNode(new int[]{}));
-        ListNode excepted = buildListNode(new int[]{});
+        ListNode result = SOLUTION.mergeTwoLists(ListNodeUtil.buildListNode(new int[]{}), ListNodeUtil.buildListNode(new int[]{}));
+        ListNode excepted = ListNodeUtil.buildListNode(new int[]{});
         assertIsEqual(result, excepted);
     }
 
     @Test
     public void test02() {
-        ListNode result = SOLUTION.mergeTwoLists(buildListNode(new int[]{}), buildListNode(new int[]{0}));
-        ListNode excepted = buildListNode(new int[]{0});
+        ListNode result = SOLUTION.mergeTwoLists(ListNodeUtil.buildListNode(new int[]{}), ListNodeUtil.buildListNode(new int[]{0}));
+        ListNode excepted = ListNodeUtil.buildListNode(new int[]{0});
         assertIsEqual(result, excepted);
     }
 
@@ -44,11 +45,4 @@ public class _0021_MergeTwoSortedListTests {
         assertIsEqual(first.getNext(), second.getNext());
     }
 
-    private ListNode buildListNode(int[] ints) {
-        ListNode next = null;
-        for (int i = ints.length - 1; i >= 0; i--) {
-            next = new ListNode(ints[i], next);
-        }
-        return next;
-    }
 }
