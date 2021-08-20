@@ -4,11 +4,49 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * 回溯法的典型应用（我理解的回溯法就是不停的递归）
- * 这个算法不是自己想出来的，是抄的
+ * generateParenthesis0后面有空再看
  */
 public class _0020_GenerateParenthesis {
-    public List<String> generateParenthesis(int n) {
+    class Solution {
+        public boolean isValid(String s) {
+            if (s == null || s.length() == 0) {
+                return true;
+            }
+            LinkedList<Character> stack = new LinkedList<>();
+            for (int i = 0; i < s.length(); i++) {
+                Character c = s.charAt(i);
+                if (c.equals('(') || c.equals('[') || c.equals('{')) {
+                    stack.push(c);
+                } else {
+                    if (stack.isEmpty()) {
+                        return false;
+                    }
+                    Character left = stack.pop();
+                    if (!left.equals(getPair(c))) {
+                        return false;
+                    }
+                }
+            }
+            if (stack.isEmpty()) {
+                return true;
+            }
+            return false;
+        }
+        private Character getPair(Character c) {
+            if (c.equals(')')) {
+                return '(';
+            }
+            if (c.equals(']')) {
+                return '[';
+            }
+            if (c.equals('}')) {
+                return '{';
+            }
+            throw new IllegalArgumentException(String.format("Illegal argument: %s", c));
+        }
+    }
+
+    public List<String> generateParenthesis0(int n) {
         List<String> lists = new LinkedList<>();
         backtrace(lists, "", 0, 0, 0, n);
         return lists;
@@ -22,12 +60,12 @@ public class _0020_GenerateParenthesis {
         if (left < max)
             backtrace(list, string + "(", total + 1, left + 1, right, max);
         if (right < left)
-            backtrace(list, string + ")", total + 1,left, right + 1, max);
-
+            backtrace(list, string + ")", total + 1, left, right + 1, max);
     }
+
     public static void main(String[] args) {
         _0020_GenerateParenthesis a = new _0020_GenerateParenthesis();
-        List<String> lists = a.generateParenthesis(3);
+        List<String> lists = a.generateParenthesis0(3);
         for (String list : lists)
             System.out.println(list);
     }
