@@ -1,10 +1,36 @@
 package com.fullofinspiration.github.leetcode;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
 /**
- * 计算所有排列 根据n! = n * (n-1)... * 1方式
- * while循环每次都往每个元素中加一个值，第一次n个值（list中共n个值），
- * 第二次n-1个值，直到最后加一个值，每次从小到大，来保证遍历一次就能遍历所有的值
- * 判断已有值中是否包含新加的值：list.contains() 该方式节省内存，但是耗费cpu
+ * 后面再看其他解法
  */
 public class _0046_Permutation {
+    class Solution {
+        public List<List<Integer>> permute(int[] nums) {
+            List<List<Integer>> all = new ArrayList<>();
+            Queue<List<Integer>> queue = new LinkedList<>();
+            queue.add(new ArrayList<>());
+            while (!queue.isEmpty()) {
+                List<Integer> curList = queue.remove();
+                for (int i = 0; i < nums.length; i++) {
+                    if (curList.contains(nums[i])) {
+                        continue;
+                    }
+                    ArrayList<Integer> curValues = new ArrayList<>(curList);
+                    curValues.add(nums[i]);
+                    if (curValues.size() == nums.length) {
+                        all.add(curValues);
+                    } else {
+                        queue.add(curValues);
+                    }
+                }
+            }
+            return all;
+        }
+    }
+
 }
