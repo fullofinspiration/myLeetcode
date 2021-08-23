@@ -1,13 +1,51 @@
 package com.fullofinspiration.github.leetcode;
 
+import static java.lang.System.*;
+
 /**
+ * 写出结果后耗时过长，最终参考的历史提交的算法
  * medium
- * 1 回文可能中间有一个值，可能中间有两个值
- * 2 如何得到最长的回文子字符（） 已经找到思路： i：1 ~ n-1 j: i+1 ~ n-1 有一个最大长度的list i递增，j递减
- * 依次比较，记录当前值 若有合适的值，break，i++ 若没有，i++ 直到遍历结束
  */
 public class _0005_LongestPalindromicSubstring {
+    /**
+     * 参考的别人的写法
+     * 1 回文可能中间有一个值，可能中间有两个值
+     * 2 每次从中间开始向两边延长，如果有比之前更大的值就记录
+     * 3 遍历到最后得到最长的值
+     */
     class Solution {
+        public String longestPalindrome(String s) {
+            if (s == null || s.length() == 0) {
+                return "";
+            }
+            int start = 0;
+            int end = 0;
+            for (int i = 0; i < s.length(); i++) {
+                int curMaxLength = Math.max(getMaxLength(s, i, i), getMaxLength(s, i, i + 1));
+                if (curMaxLength > end - start + 1) {
+                    start = i - (curMaxLength - 1) / 2;
+                    end = i + curMaxLength / 2;
+                }
+            }
+            return s.substring(start, end + 1);
+        }
+
+        private int getMaxLength(String s, int start, int end) {
+            if (start < 0 || end >= s.length()) {
+                return 0;
+            }
+            while (start >= 0 && end < s.length() && start <= end && s.charAt(start) == s.charAt(end)) {
+                start--;
+                end++;
+            }
+            return end - start - 1;
+        }
+    }
+
+    /**
+     * 本机跑了5min没有结果，原因可能是1 代码耗费性能，耗时很长，2可能代码有bug："babaddtattarrattatddetartrateedredividerb"
+     */
+    class Solution1 {
         public String longestPalindrome(String s) {
             if (s == null || s.length() == 0) {
                 return "";
@@ -43,9 +81,9 @@ public class _0005_LongestPalindromicSubstring {
     public static void main(String[] args) {
         String s =
                 "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabcaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-        System.out.println(s.length());
+        out.println(s.length());
         String result = longestPalindrome(s);
-        System.out.println(result.length());
+        out.println(result.length());
     }
 
     //代码没问题，但是对于他的某些案例（比如只有中间的值不一样，其他部分的值都一样）,求解过慢，导致超时，只能用他提供的按照中心点来求比较快.
@@ -80,7 +118,8 @@ public class _0005_LongestPalindromicSubstring {
         if (s == null || s.length() <= 0) {
             return s;
         }
-        int begin = 0, end = 0;
+        int begin = 0;
+        int end = 0;
         for (int i = 0; i < s.length(); i++) {
             int preLen = getMaxLength(s, i, i);
             int afterLen = getMaxLength(s, i, i + 1);
@@ -104,6 +143,4 @@ public class _0005_LongestPalindromicSubstring {
 
         return after - prev - 1;
     }
-
-
 }

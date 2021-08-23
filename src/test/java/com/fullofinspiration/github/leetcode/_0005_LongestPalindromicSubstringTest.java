@@ -29,4 +29,10 @@ public class _0005_LongestPalindromicSubstringTest {
         String res = SOLUTION.longestPalindrome("ac");
         Assert.assertEquals("a", res);
     }
+
+    @Test
+    public void test04() {
+        String res = SOLUTION.longestPalindrome("babaddtattarrattatddetartrateedredividerb");
+        Assert.assertEquals("ddtattarrattatdd", res);
+    }
 }
