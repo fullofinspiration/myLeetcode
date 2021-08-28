@@ -8,7 +8,27 @@ import com.fullofinspiration.github.tool.ListNode;
  * 第二点是删除的节点是否是第一个节点
  */
 public class _019_RemoveNthFromEnd {
-    public ListNode removeNthFromEnd(ListNode head, int n) {
+    class Solution {
+        public ListNode removeNthFromEnd(ListNode head, int n) {
+            ListNode dummy = new ListNode();
+            dummy.next = head;
+
+            ListNode later = dummy;
+            for (int i = 0; i < n; i++) {
+                later = later.next;
+            }
+
+            ListNode pre = dummy;
+            while (later.next != null) {
+                later = later.next;
+                pre = pre.next;
+            }
+            pre.next = pre.next.next;
+            return dummy.next;
+        }
+    }
+
+    public ListNode removeNthFromEnd01(ListNode head, int n) {
         ListNode cur = head, afterN = head;
         while (n-- != 0)
             afterN = afterN.next;
@@ -21,22 +41,6 @@ public class _019_RemoveNthFromEnd {
         }
         cur.next = cur.next.next;
         return head;
-    }
-
-
-    public static void main(String[] args) {
-        ListNode listNode1 = new ListNode(1);
-        ListNode listNode2 = new ListNode(2);
-        ListNode listNode3 = new ListNode(3);
-        ListNode listNode4 = new ListNode(4);
-        ListNode listNode5 = new ListNode(5);
-        //System.out.println(listNode2.next == null);
-        listNode1.next = listNode2;
-        listNode2.next = listNode3;
-        listNode3.next = listNode4;
-        listNode4.next = listNode5;
-        _019_RemoveNthFromEnd removeNthFromEnd = new _019_RemoveNthFromEnd();
-        System.out.println(removeNthFromEnd.removeNthFromEnd(listNode1, 2));
     }
 }
 
