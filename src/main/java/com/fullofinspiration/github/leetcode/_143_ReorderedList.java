@@ -20,19 +20,19 @@ public class _143_ReorderedList {
                 node2Pre.put(curNode.next, curNode);
                 curNode = curNode.next;
             }
-
-            ListNode last = curNode;
-            ListNode preNodeFromStart = head;
-            while (preNodeFromStart.next != last && preNodeFromStart != last) {
-                ListNode temp = preNodeFromStart.next;
-                preNodeFromStart.next = last;
-                ListNode temp1 = last.next;
-                last.next = temp.next;
-                node2Pre.get(last).next = temp;
-                temp.next = temp1;
-
-                preNodeFromStart = preNodeFromStart.next;
-                last = node2Pre.get(last);
+            ListNode end = curNode;
+            ListNode pre4Begin = head;
+            while (pre4Begin.next != null) {
+                node2Pre.get(end).next = null;
+                end.next = pre4Begin.next;
+                pre4Begin.next = end;
+                if (end.next != null) {
+                    pre4Begin = end;
+                }
+                if (pre4Begin.next != null) {
+                    pre4Begin = pre4Begin.next;
+                }
+                end = node2Pre.get(end);
             }
         }
     }
