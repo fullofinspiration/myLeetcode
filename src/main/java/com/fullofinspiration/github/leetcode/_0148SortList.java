@@ -10,8 +10,25 @@ import java.util.stream.Collectors;
  * Created by Zhenpeng Zhang on 2021/2/19.
  */
 public class _0148SortList {
-    //todo 目前超时，后面再做
     class Solution {
+        //冒泡
+        public ListNode sortList(ListNode head) {
+            if (head == null) {
+                return null;
+            }
+            ListNode dummyFirst = new ListNode();
+            ListNode dummySecond = new ListNode();
+            dummyFirst.next = head;
+            dummySecond.next = head;
+
+            int curLength = 1;
+            //todo
+            return null;
+        }
+    }
+
+    //冒泡运行超时
+    class Solution2 {
         //冒泡
         public ListNode sortList(ListNode head) {
             if (head == null) {
@@ -51,8 +68,10 @@ public class _0148SortList {
         print(result);
     }
 
+    /**
+     * 参考答案后写出的归并排序
+     */
     class Solution1 {
-
         public ListNode sortList(ListNode head) {
             if (head == null || head.next == null) {
                 return head;
