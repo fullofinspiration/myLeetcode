@@ -29,7 +29,7 @@ public class _0082_RemoveDuplicatesFromSortedList2Test {
 
     @Test
     public void test02() {
-        int[] ints = {-1,0,0,0,0,3,3};
+        int[] ints = {-1, 0, 0, 0, 0, 3, 3};
         ListNode head = ListNodeUtil.buildListNode(ints);
         ListNode rst = SOLUTION.deleteDuplicates(head);
         ListNode expect = ListNodeUtil.buildListNode(new int[]{-1});
