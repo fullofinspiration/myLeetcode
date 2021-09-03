@@ -1,19 +1,32 @@
 package com.fullofinspiration.github.leetcode;
 
-/**
- * 递归方式是代码是最简单的
- * boolean validateIsBST(Node root) {
- *     if (root == null) {
- *         return true;
- *     }
- *     if (root.left != null && root.value<= root.left.value){
- *         return false;
- *     }
- *     if (root.right !=null && root.value >=root.right.value) {
- *         return false;
- *     }
- *     return validateIsBST(root.left) && validateIsBST(root.right);
- * }
- */
+import com.fullofinspiration.github.tool.TreeNode;
+
 public class _0098_ValidateBinarySearchTree {
+    class Solution {
+        Integer pre;
+        public boolean isValidBST(TreeNode root) {
+            if (root == null) {
+                return true;
+            }
+            return validBST(root);
+        }
+
+        boolean validBST(TreeNode node) {
+            if (node.left != null) {
+                boolean validBST = validBST(node.left);
+                if (!validBST) {
+                    return false;
+                }
+            }
+            if (pre != null && pre >= node.val) {
+                return false;
+            }
+            pre = node.val;
+            if (node.right != null) {
+                return validBST(node.right);
+            }
+            return true;
+        }
+    }
 }
