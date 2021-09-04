@@ -18,10 +18,7 @@ public class _0101_SymmetricTree {
             if (root.left == null && root.right == null) {
                 return true;
             }
-            if (root.left == null) {
-                return false;
-            }
-            if (root.right == null) {
+            if (root.left == null || root.right ==null) {
                 return false;
             }
             if (root.left.val != root.right.val) {
