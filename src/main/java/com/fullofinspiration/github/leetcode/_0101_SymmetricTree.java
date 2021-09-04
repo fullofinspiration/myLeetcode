@@ -5,6 +5,7 @@ import com.fullofinspiration.github.tool.TreeNode;
 import java.util.LinkedList;
 
 /**
+ * @formatter:off
  * if (root == null)  {
  *     return true;
  * return true;
@@ -39,6 +40,7 @@ import java.util.LinkedList;
  *         return true;
  *     }
  *     all= nextNodes;
+ * @formatter:on
  */
 public class _0101_SymmetricTree {
 
