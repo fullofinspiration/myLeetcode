@@ -1,6 +1,6 @@
 package com.fullofinspiration.github.leetcode;
 
-public class FirstAndLastPositionOfElementInSortedArray {
+public class _0034_FirstAndLastPositionOfElementInSortedArray {
 
   /**
    * 一把过，我真是太牛逼了,但是方法有点问题，太过复杂了
