@@ -12,14 +12,14 @@ public class _0034_FirstAndLastPositionOfElementInSortedArrayTest {
 
     @Test
     public void test00() {
-        int[] rst = SOLUTION.searchRange(new int[]{5, 7, 7, 8, 8, 10}, 8);
+        int[] rst = SOLUTION.searchRange(new int[]{5, 7, 7, 8, 8, 10, 10}, 8);
         int[] expect = {3, 4};
         assertEquals(Arrays.toString(expect), Arrays.toString(rst));
     }
 
     @Test
     public void test01() {
-        int[] rst = SOLUTION.searchRange(new int[]{5, 7, 7, 8, 8, 10}, 6);
+        int[] rst = SOLUTION.searchRange(new int[]{5, 7, 7, 8, 10}, 6);
         int[] expect = {-1, -1};
         assertEquals(Arrays.toString(expect), Arrays.toString(rst));
     }
@@ -28,6 +28,20 @@ public class _0034_FirstAndLastPositionOfElementInSortedArrayTest {
     public void test02() {
         int[] rst = SOLUTION.searchRange(new int[]{}, 6);
         int[] expect = {-1, -1};
+        assertEquals(Arrays.toString(expect), Arrays.toString(rst));
+    }
+
+    @Test
+    public void test03() {
+        int[] rst = SOLUTION.searchRange(new int[]{5, 7, 7, 8, 8, 10}, 8);
+        int[] expect = {3, 4};
+        assertEquals(Arrays.toString(expect), Arrays.toString(rst));
+    }
+
+    @Test
+    public void test04() {
+        int[] rst = SOLUTION.searchRange(new int[]{2, 2}, 2);
+        int[] expect = {0, 1};
         assertEquals(Arrays.toString(expect), Arrays.toString(rst));
     }
 }
