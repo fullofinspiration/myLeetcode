@@ -11,19 +11,72 @@ import java.util.stream.Collectors;
  */
 public class _0148SortList {
     class Solution {
-        //冒泡
         public ListNode sortList(ListNode head) {
             if (head == null) {
                 return null;
             }
-            ListNode dummyFirst = new ListNode();
-            ListNode dummySecond = new ListNode();
-            dummyFirst.next = head;
-            dummySecond.next = head;
-
-            int curLength = 1;
-            //todo
-            return null;
+            ListNode fakeHead = new ListNode();
+            fakeHead.next = head;
+            int interval = 1;
+            while (true) {
+                ListNode headOfEachLoop = fakeHead;
+                boolean firstLoop = true;
+                while (true) {
+                    ListNode first = headOfEachLoop.next;
+                    ListNode second = first;
+                    int tempInterval = interval;
+                    while (tempInterval > 0 && second != null) {
+                        second = second.next;
+                        tempInterval--;
+                    }
+                    if (second == null) {
+                        if (firstLoop) {
+                            return fakeHead.next;
+                        } else {
+                            //每次遍历时结尾的元素
+                            while (first != null) {
+                                headOfEachLoop.next = first;
+                                headOfEachLoop = headOfEachLoop.next;
+                                first = first.next;
+                            }
+                            break;
+                        }
+                    }
+                    firstLoop = false;
+                    int leftCount = interval;
+                    int rightCont = interval;
+                    while (leftCount > 0 && rightCont > 0 && second != null) {
+                        if (first.val > second.val) {
+                            headOfEachLoop.next = second;
+                            headOfEachLoop = second;
+                            second = second.next;
+                            rightCont--;
+                        } else {
+                            headOfEachLoop.next = first;
+                            headOfEachLoop = first;
+                            first = first.next;
+                            leftCount--;
+                        }
+                    }
+                    if (leftCount > 0) {
+                        while (leftCount > 0) {
+                            headOfEachLoop.next = first;
+                            headOfEachLoop = headOfEachLoop.next;
+                            leftCount--;
+                            first = first.next;
+                        }
+                        headOfEachLoop.next = second;
+                    } else {
+                        while (rightCont > 0 && second != null) {
+                            headOfEachLoop.next = second;
+                            headOfEachLoop = headOfEachLoop.next;
+                            rightCont--;
+                            second = second.next;
+                        }
+                    }
+                }
+                interval <<= 1;
+            }
         }
     }
 
