@@ -1,7 +1,8 @@
 package com.fullofinspiration.github.util;
 
 import com.fullofinspiration.github.tool.TreeNode;
-import com.sun.istack.internal.Nullable;
+
+import javax.annotation.Nullable;
 
 public class TreeNodeUtil {
     public static boolean equal(@Nullable TreeNode first, @Nullable TreeNode second) {

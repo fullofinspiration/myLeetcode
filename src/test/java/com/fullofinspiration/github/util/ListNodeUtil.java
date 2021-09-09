@@ -1,7 +1,8 @@
 package com.fullofinspiration.github.util;
 
 import com.fullofinspiration.github.tool.ListNode;
-import com.sun.istack.internal.Nullable;
+
+import javax.annotation.Nullable;
 
 
 public class ListNodeUtil {
