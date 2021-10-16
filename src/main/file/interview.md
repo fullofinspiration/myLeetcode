@@ -68,3 +68,38 @@ Java虚拟机规范规定了6块区域，分别是虚拟机栈，堆，方法区
 5 乐观锁是如何实现的
 6 Kafka原理，kafka为什么这么快
 7 B加树和红黑树 b树 二叉树区别
+
+# 白龙马一面
+# 白龙马二面
+
+# 58 一面
+主要
+
+
+# 陌陌一面
+mysql为什么使用b+树不使用b树
+讲一下concurrentHashmap 和hashmap
+java7为什么并发度是16
+如何计算出三层b+树最大数量是2000w？
+hashmap扩容为什么使用2的整数倍
+myasm和innodb区别
+b+树 每个非叶子节点保存了什么
+
+算法题 19题
+https://leetcode.com/problems/remove-nth-node-from-end-of-list/
+# 陌陌二面
+判断链表是否有环
+
+# 新浪微博一面
+rpc原理
+
+# aviagames一面  2021 20:10
+内存模型
+volatile synchronized lock区别
+hashmap自动扩容
+垃圾回收设置young gc暂停时间和最小间隔参数
+future task原理
+kafka高可用 高吞吐原因
+零拷贝是如何实现的，调用了操作系统的什么系统方法
+
+
