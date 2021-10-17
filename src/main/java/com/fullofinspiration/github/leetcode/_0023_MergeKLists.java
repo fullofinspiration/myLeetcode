@@ -12,7 +12,7 @@ import java.util.List;
  * 里面又嵌套了两个出口，也就是调用mergeTwoLists方法相当于也是一个递归方法，
  * 这个方式好奇特，以前从没有遇到过
  */
-public class _023_MergeKLists {
+public class _0023_MergeKLists {
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         if (l1 == null)
             return l2;
@@ -83,7 +83,7 @@ public class _023_MergeKLists {
         listNodes.add(l1);
         listNodes.add(l2);
         listNodes.add(l3);
-        _023_MergeKLists l = new _023_MergeKLists();
+        _0023_MergeKLists l = new _0023_MergeKLists();
         ListNode listNode = l.mergeKLists1(listNodes);
         while (listNode != null) {
             System.out.println(listNode.val);

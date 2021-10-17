@@ -1,6 +1,7 @@
 package com.fullofinspiration.github.leetcode;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 1)连续的 2)不重复的，故保存三个数据：
@@ -8,12 +9,39 @@ import java.util.HashMap;
  * 2 保存之前最大长度
  * 3 保存当前正在遍历的不重复的低点索引值，
  * 最终通过遍历可以得到最终最长不重复子串长度
- *
+ * <p>
  * medium
  */
 public class _0003_LongestCommonPrefix {
-
+    /**
+     * 第二次写，比上一次的方法更简洁
+     */
     class Solution {
+        public int lengthOfLongestSubstring(String s) {
+            if (s == null || s.length() == 0) {
+                return 0;
+            }
+            Map<Character, Integer> char2Index = new HashMap<>();
+            int max = 0;
+            int curLength = 0;
+            for (int i = 0; i < s.length(); i++) {
+                char curValue = s.charAt(i);
+                if (!char2Index.containsKey(curValue) || char2Index.get(curValue) < i - curLength) {
+                    curLength++;
+                    if (curLength > max) {
+                        max = curLength;
+                    }
+                } else {
+                    curLength = i - char2Index.get(curValue) ;
+                }
+                char2Index.put(curValue, i);
+            }
+            return max;
+        }
+    }
+
+
+    class Solution01 {
         public int lengthOfLongestSubstring(String s) {
             if (s == null || s.length() == 0) {
                 return 0;
