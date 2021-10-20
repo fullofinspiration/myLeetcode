@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class _200_NumberOfLands {
+public class _0200_NumberOfLands {
     /**
      * 新建一个数组，设置每个节点是否被访问过
      * 一个总数量标记当前岛屿数量

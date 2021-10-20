@@ -3,11 +3,11 @@ package com.fullofinspiration.github.leetcode;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class _200_NumberOfLandsTest {
+public class _0200_NumberOfLandsTest {
 
     @Test
     public void test00() {
-        _200_NumberOfLands.Solution solution = new _200_NumberOfLands().new Solution();
+        _0200_NumberOfLands.Solution solution = new _0200_NumberOfLands().new Solution();
 
         char[][] chars = {
                 new char[]{'1', '1', '1', '1', '0'},
@@ -21,7 +21,7 @@ public class _200_NumberOfLandsTest {
 
     @Test
     public void test01() {
-        _200_NumberOfLands.Solution solution = new _200_NumberOfLands().new Solution();
+        _0200_NumberOfLands.Solution solution = new _0200_NumberOfLands().new Solution();
         char[][] chars = {
                 new char[]{'1', '1', '0', '0', '0'},
                 new char[]{'1', '1', '0', '0', '0'},
@@ -34,7 +34,7 @@ public class _200_NumberOfLandsTest {
 
     @Test
     public void test02() {
-        _200_NumberOfLands.Solution solution = new _200_NumberOfLands().new Solution();
+        _0200_NumberOfLands.Solution solution = new _0200_NumberOfLands().new Solution();
         char[][] chars = {
                 new char[]{'1', '1', '1'},
                 new char[]{'0', '1', '0'},
