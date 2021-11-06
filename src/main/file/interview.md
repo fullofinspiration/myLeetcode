@@ -112,3 +112,17 @@ redis如何实现内存回收的
 # 美团一面 2021 10.25 20:30
 mysql锁
 最小覆盖字串
+
+# 快手二次一面 2021.10.29 20：30～21:30
+synchronized 原理
+volatile原理
+volatile和synchronized区别
+reentrantLock实现
+cas原理
+循环引用原理
+ioc和aop区别
+kafka设置了几个分区
+redis脑裂如何解决
+kafka高容量如何实现
+微服务服务治理
+volatile 对64位数据修改是否是原子性的
