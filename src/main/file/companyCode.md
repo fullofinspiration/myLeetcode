@@ -6,8 +6,8 @@
 2021-09-24 数组中的逆序对 hard 剑指 Offer 51.  
 2021-09-08 岛屿数量 mid leetcode 200 done 
 2021-09-08 岛屿最大数量 mid leetcode 695 done  
-2021-09-27 青蛙跳台阶问题 easy 剑指 Offer 10- II  
-2021-09-27 合并区间 mid leetcode 56  
+2021-09-27 青蛙跳台阶问题 easy 剑指 Offer 10- II  done
+2021-09-27 合并区间 mid leetcode 56 done
 2021-09-27 统计词频 mid leetcode 192  
 2021-09-27 正则表达式匹配 hard leetcode 10 
 2021-06-09 两个有序数组中位数 hard leetcode 4  
