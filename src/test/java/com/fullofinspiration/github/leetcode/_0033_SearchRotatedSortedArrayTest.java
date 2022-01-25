@@ -40,4 +40,11 @@ public class _0033_SearchRotatedSortedArrayTest {
         int search = SOLUTION.search(ints, 5);
         Assert.assertEquals(0, search);
     }
+
+    @Test
+    public void test05() {
+        int[] ints = {5, 1, 3};
+        int search = SOLUTION.search(ints, 3);
+        Assert.assertEquals(2, search);
+    }
 }

@@ -1,10 +1,37 @@
 package com.fullofinspiration.github.leetcode;
 
-/**
- * 自己写的其他解法有空再看
- */
+
 public class _0033_SearchRotatedSortedArray {
     class Solution {
+        public int search(int[] nums, int target) {
+            int low = 0;
+            int high = nums.length - 1;
+            while (low <= high) {
+                int mid = (low + high) / 2;
+                if (nums[mid] == target) {
+                    return mid;
+                }
+              boolean inRange = inRange(nums, low, mid, target);
+              if (inRange) {
+                    high = mid - 1;
+                } else {
+                  low = mid + 1;
+                }
+            }
+            return -1;
+        }
+        private boolean inRange(int[] nums, int low, int high, int target) {
+          System.out.println(String.format("Low: %s, high: %s, target: %s.", low,high, target));
+            if (nums[low] <= nums[high]) {
+                return nums[low] <= target && nums[high] >= target;
+            }
+            return target >= nums[low] || target <= nums[high];
+        }
+    }
+    /**
+     * 自己写的其他解法有空再看
+     */
+    class Solution1 {
         public int search(int[] nums, int target) {
             if (nums == null || nums.length == 0) {
                 return -1;

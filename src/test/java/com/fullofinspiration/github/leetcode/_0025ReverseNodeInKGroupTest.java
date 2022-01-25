@@ -43,4 +43,13 @@ public class _0025ReverseNodeInKGroupTest {
         boolean equal = ListNodeUtil.equal(expect, rst);
         Assert.assertTrue(equal);
     }
+
+    @Test
+    public void test04() {
+        ListNode head = ListNodeUtil.buildListNode(new int[]{1, 2});
+        ListNode rst = SOLUTION.reverseKGroup(head, 2);
+        ListNode expect = ListNodeUtil.buildListNode(new int[]{2,1});
+        boolean equal = ListNodeUtil.equal(expect, rst);
+        Assert.assertTrue(equal);
+    }
 }
