@@ -39,7 +39,7 @@ public class BinaryTreeAdderOfOdd {
     }
 
 
-    public class TreeNode {
+    private class TreeNode {
 
         public int val;
         public TreeNode left;
