@@ -4,11 +4,35 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 
 import javax.annotation.Nullable;
-import java.util.HashSet;
-import java.util.List;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class ListUtil {
     private static final String MSG_FORMAT = "Exists only in one side: %s, first: %s, second: %s";
+
+    public static <T> boolean equalV2(@Nullable List<T> first, @Nullable List<T> second) {
+        if (first == null && second == null) {
+            return true;
+        }
+        if (first == null || second == null) {
+            return false;
+        }
+        if (first.size() != second.size()) {
+            String msg = String.format("first size: %s is not equal to second size: %s, first: %s, second: %s",
+                    first.size(), second.size(), first, second);
+            System.out.println(msg);
+            return false;
+        }
+        for (int i = 0; i < first.size(); i++) {
+            if (!Objects.equals(first.get(i), second.get(i))) {
+                String msg = String.format("idx: %s first val: %s is not equal to second val: %s, first: %s, second: %s",
+                        i, first.get(i), second.get(i), first, second);
+                System.out.println(msg);
+                return false;
+            }
+        }
+        return true;
+    }
 
     public static <T> boolean equal(@Nullable List<T> first, @Nullable List<T> second) {
         if (first == null && second == null) {
@@ -32,4 +56,5 @@ public class ListUtil {
         }
         return true;
     }
+
 }
