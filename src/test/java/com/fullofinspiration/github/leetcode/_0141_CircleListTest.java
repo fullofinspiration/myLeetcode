@@ -17,7 +17,7 @@ public class _0141_CircleListTest {
         listNode1.next = listNode2;
         listNode2.next = listNode3;
         listNode3.next = listNode1;
-        boolean hasCirCle = SOLUTION.hasCirCle(listNode);
+        boolean hasCirCle = SOLUTION.hasCycle(listNode);
         Assert.assertTrue(hasCirCle);
     }
 
@@ -27,14 +27,14 @@ public class _0141_CircleListTest {
         ListNode listNode1 = new ListNode(2);
         listNode.next = listNode1;
         listNode1.next = listNode;
-        boolean hasCirCle = SOLUTION.hasCirCle(listNode);
+        boolean hasCirCle = SOLUTION.hasCycle(listNode);
         Assert.assertTrue(hasCirCle);
     }
 
     @Test
     public void test02() {
         ListNode listNode = new ListNode(3);
-        boolean hasCirCle = SOLUTION.hasCirCle(listNode);
+        boolean hasCirCle = SOLUTION.hasCycle(listNode);
         Assert.assertFalse(hasCirCle);
     }
 

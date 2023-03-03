@@ -8,8 +8,30 @@ import java.util.List;
 import java.util.Set;
 
 public class _0141_CircleList {
-    class Solution {
-        public boolean hasCirCle(ListNode head) {
+    /**
+     * https://leetcode.com/problems/linked-list-cycle/solutions/44694/accepted-clean-java-solution/?orderBy=most_votes
+     */
+    public class Solution {
+        public boolean hasCycle(ListNode head) {
+            if (head == null) {
+                return false;
+            }
+            ListNode first = head, second = head;
+            second = head.next;
+            while (first != null && second != null) {
+                if (first == second) {
+                    return true;
+                }
+                first = first.next;
+                second = second.next;
+                second = second == null ? null : second.next;
+            }
+            return false;
+        }
+    }
+
+    class Solution00 {
+        public boolean hasCyCle(ListNode head) {
             Set<ListNode> visitedNodes = new HashSet<>();
             while (head != null) {
                 if (visitedNodes.contains(head)) {
