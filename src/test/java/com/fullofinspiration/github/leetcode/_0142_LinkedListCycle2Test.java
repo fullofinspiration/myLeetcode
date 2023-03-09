@@ -30,5 +30,11 @@ public class _0142_LinkedListCycle2Test {
         ListNode res = SOLUTION.detectCycle(listNode);
         Assert.assertNull(res);
     }
+    @Test
+    public void test03() {
+        ListNode listNode = ListNodeUtil.buildListNode(new int[]{1,2});
+        ListNode res = SOLUTION.detectCycle(listNode);
+        Assert.assertNull(res);
+    }
 
-}
+    }
