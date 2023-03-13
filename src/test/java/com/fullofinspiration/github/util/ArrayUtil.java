@@ -1,6 +1,5 @@
 package com.fullofinspiration.github.util;
 
-import com.fullofinspiration.github.tool.ListNode;
 
 import java.util.Arrays;
 import java.util.List;
