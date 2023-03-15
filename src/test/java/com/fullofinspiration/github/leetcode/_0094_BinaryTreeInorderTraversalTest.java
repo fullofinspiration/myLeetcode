@@ -26,7 +26,7 @@ public class _0094_BinaryTreeInorderTraversalTest {
         TreeNode treeNode1 = new TreeNode(1);
         treeNode1.left = new TreeNode(2);
         List<Integer> integers = solution.inorderTraversal(treeNode1);
-        Assert.assertEquals(ImmutableList.of(2,1), integers);
+        Assert.assertEquals(ImmutableList.of(2, 1), integers);
     }
 
     @Test
@@ -35,7 +35,7 @@ public class _0094_BinaryTreeInorderTraversalTest {
         TreeNode treeNode1 = new TreeNode(1);
         treeNode1.right = new TreeNode(2);
         List<Integer> integers = solution.inorderTraversal(treeNode1);
-        Assert.assertEquals(ImmutableList.of(1,2), integers);
+        Assert.assertEquals(ImmutableList.of(1, 2), integers);
     }
 
 }
