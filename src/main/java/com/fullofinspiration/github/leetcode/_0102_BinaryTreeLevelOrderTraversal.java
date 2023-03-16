@@ -2,37 +2,66 @@ package com.fullofinspiration.github.leetcode;
 
 import com.fullofinspiration.github.tool.TreeNode;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.sql.Array;
+import java.util.*;
 
-/**
- * List<List<Integer>> allValues = new ArrayList<>();
- * if (root == null)  {
- * return allValues;
- * }
- * List<Node> all = new ArrayList<>();
- * all.add(root);
- * while(all.size > 0) {
- * List<Integer> curValues = new ArrayList<>();
- * List<Node> nextNodes = new ArrayList();
- * for(int i=0, i< all.size();i++) {
- * Node curNode =  all.get(i);
- * curValues.add(curNode.value);
- * if (curNode.left!=null) {
- * nextNodes.add(curNode.left);
- * }
- * if (curNode.right!=null) {
- * nextNodes.add(curNode.right);
- * }
- * }
- * allValues.add(curValues);
- * all= nextNodes;
- * }
- */
 public class _0102_BinaryTreeLevelOrderTraversal {
+    /**
+     * 1 队列，每次都放进去
+     * 2 遍历队列前算有多少个值，每次遍历完，将左右节点的值都 放进去
+     * 3 直到队列为空为止
+     */
     class Solution {
+        public List<List<Integer>> levelOrder(TreeNode root) {
+            if (root == null) {
+                return Collections.emptyList();
+            }
+            Queue<TreeNode> all = new LinkedList<>();
+            all.offer(root);
+            List<List<Integer>> rst = new ArrayList<>();
+            while (!all.isEmpty()) {
+                int size = all.size();
+                List<Integer> cur = new ArrayList<>();
+                while (size-- > 0) {
+                    if (all.peek().left != null) {
+                        all.offer(all.peek().left);
+                    }
+                    if (all.peek().right != null) {
+                        all.offer(all.peek().right);
+                    }
+                    cur.add(all.poll().val);
+                }
+                rst.add(cur);
+            }
+            return rst;
+        }
+    }
+
+    /**
+     * List<List<Integer>> allValues = new ArrayList<>();
+     * if (root == null)  {
+     * return allValues;
+     * }
+     * List<Node> all = new ArrayList<>();
+     * all.add(root);
+     * while(all.size > 0) {
+     * List<Integer> curValues = new ArrayList<>();
+     * List<Node> nextNodes = new ArrayList();
+     * for(int i=0, i< all.size();i++) {
+     * Node curNode =  all.get(i);
+     * curValues.add(curNode.value);
+     * if (curNode.left!=null) {
+     * nextNodes.add(curNode.left);
+     * }
+     * if (curNode.right!=null) {
+     * nextNodes.add(curNode.right);
+     * }
+     * }
+     * allValues.add(curValues);
+     * all= nextNodes;
+     * }
+     */
+    class Solution00 {
         public List<List<Integer>> levelOrder(TreeNode root) {
             if (root == null) {
                 return Collections.emptyList();
