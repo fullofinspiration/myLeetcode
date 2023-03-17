@@ -4,7 +4,7 @@ Spring生命周期：没有背熟导致被回答的不好
 
 Spring事物原理：不清楚
 
-MySQL事物原理：undolog
+MySQL事务原理：undolog
 
 项目问题：支付幂等性悲观锁金额乐观锁
 
