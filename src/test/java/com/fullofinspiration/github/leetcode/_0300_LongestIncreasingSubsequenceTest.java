@@ -3,8 +3,8 @@ package com.fullofinspiration.github.leetcode;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class _300_LongestIncreasingSubsequenceTest {
-    private static final _300_LongestIncreasingSubsequence.Solution SOLUTION = new _300_LongestIncreasingSubsequence().new Solution();
+public class _0300_LongestIncreasingSubsequenceTest {
+    private static final _0300_LongestIncreasingSubsequence.Solution SOLUTION = new _0300_LongestIncreasingSubsequence().new Solution();
 
     @Test
     public void test00() {

@@ -3,7 +3,33 @@ package com.fullofinspiration.github.leetcode;
 import java.util.Arrays;
 
 public class _0322_CoinChanges {
+
+    /**
+     * nums[n] = nums[n-coins] 取其中最大值
+     * 错误1 初始值应该是Integer.MAX_VALUE 而不是-1，否则一直是-1
+     * 初始值设置成-1，这里极容易出错
+     */
     class Solution {
+        public int coinChange(int[] coins, int amount) {
+            int[] rst = new int[amount + 1];
+            Arrays.fill(rst, Integer.MAX_VALUE);
+            rst[0] = 0;
+            for (int i = 1; i < rst.length; i++) {
+                int min = Integer.MAX_VALUE;
+                for (int cur : coins) {
+                    if (i - cur >= 0 && rst[i - cur] != Integer.MAX_VALUE) {
+                        min = Math.min(min, rst[i - cur] + 1);
+                    }
+                }
+                if (min != Integer.MAX_VALUE) {
+                    rst[i] = min;
+                }
+            }
+            return rst[amount] != Integer.MAX_VALUE ? rst[amount] : -1;
+        }
+    }
+
+    class Solution1 {
         public int coinChange(int[] coins, int amount) {
             if (amount == 0) {
                 return 0;
