@@ -44,4 +44,10 @@ public class _0053_MaximumSubArrayTests {
         assertEquals(-100000, maxSum);
     }
 
+    @Test
+    public void test06() {
+        int maxSum = SOLUTION.maxSubArray(new int[]{1, 2});
+        assertEquals(3, maxSum);
+    }
+
 }
