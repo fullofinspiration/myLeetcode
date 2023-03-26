@@ -2,11 +2,50 @@ package com.fullofinspiration.github.leetcode;
 
 /**
  * hard
- * todo impl
  */
 public class _0004_MedianOfTwoSortedArrays {
 
+  /**
+   * 太难了看不懂：https://leetcode.com/problems/median-of-two-sorted-arrays/solutions/2471/very-concise-o-log-min-m-n-iterative-solution-with-detailed-explanation/?orderBy=most_votes
+   * 实在太复杂了，不写了
+   * <p>
+   * 难点：
+   * 1：两个数组长度不一样
+   * 2：范围确定很难
+   * 3: 有可能有2个值，有可能有一个值
+   * 4：两个int做除法需要先转换成double
+   * if (aHigh<bLow) {
+   * if (ith<aHigh.length) {
+   * return a[ith];
+   * } else {
+   * return b[i-ith]
+   * };
+   * } else if (...) {
+   * ...
+   * } else {
+   * <p>
+   * }
+   * 结果：取((a.length+b.length)/2 + (a.length+b.length+1)/2) /2 求得的是第几个值
+   * if aMid-aLow+bMid-bLow == ith return Math.max(aMid, bMid)
+   * else if aMid-aLow+bMid-bLow > ith  aHigh = aMid-1 bHigh = bMid-1
+   * else if aMid-aLow+bMid-bLow < ith
+   */
   class Solution {
+    public double findMedianSortedArrays(int[] a, int[] b) {
+      return 0;
+    }
+
+    private int findValueOfIdx(int[] a, int aLow, int aHigh, int[] b, int bLow, int bHigh, int ith) {
+      if (ith == 1) {
+        return Math.min(a[aLow], b[bLow]);
+      }
+      int aMid = (aLow + aHigh) / 2;
+      int bMid = (bLow + bHigh) / 2;
+      return 0;
+    }
+  }
+
+  class Solution00 {
 
     public double findMedianSortedArrays(int[] a, int[] b) {
       if (a == null || b == null) {
@@ -31,22 +70,22 @@ public class _0004_MedianOfTwoSortedArrays {
         if (aLeftMax <= bRightMin && bLeftMax <= aRightMin) {
           if ((first.length + second.length) % 2 == 0) {
             return
-                ((double) (Math.max(aLeftMax, bLeftMax) + Math.min(aRightMin, bRightMin)))
-                    / 2;
+                    ((double) (Math.max(aLeftMax, bLeftMax) + Math.min(aRightMin, bRightMin)))
+                            / 2;
           }
           return Math.max(aLeftMax, bLeftMax);
         }
         if (aLeftMax > bRightMin) {
           String msg = String.format(
-              "Set HighA minus 1: %s. cur low a: %s, cur high a: %s, cur partition a: %s cur partition b: %s.",
-              partitionA - 1, lowA, highA, partitionA, partitionB);
+                  "Set HighA minus 1: %s. cur low a: %s, cur high a: %s, cur partition a: %s cur partition b: %s.",
+                  partitionA - 1, lowA, highA, partitionA, partitionB);
           System.out.println(msg);
           highA = partitionA - 1;
           continue;
         }
         String msg = String.format(
-            "Set lowA plus 1: %s. cur low a: %s, cur high a: %s, cur partition a: %s cur partition b: %s.",
-            partitionA + 1, lowA, highA, partitionA, partitionB);
+                "Set lowA plus 1: %s. cur low a: %s, cur high a: %s, cur partition a: %s cur partition b: %s.",
+                partitionA + 1, lowA, highA, partitionA, partitionB);
         System.out.println(msg);
         lowA = partitionA + 1;
       }

@@ -3,17 +3,80 @@ package com.fullofinspiration.github.leetcode;
 import static java.lang.System.*;
 
 /**
- * 写出结果后耗时过长，最终参考的历史提交的算法
  * medium
+ * 20230326 写了两种方法 total 1h
  */
 public class _0005_LongestPalindromicSubstring {
     /**
+     * 每个节点开始，都向两边遍历，若当前是回文，则记录
+     * 需要注意，有奇数和偶数的回文，两种都需要考虑到
+     */
+    class Solution {
+        int allLow, allHigh;
+
+        public String longestPalindrome(String s) {
+            if (s.length() == 0) {
+                return "";
+            }
+            for (int i = 0; i < s.length(); i++) {
+                handleCur(s, i, i);
+                handleCur(s, i, i + 1);
+            }
+            return s.substring(allLow, allHigh + 1);
+        }
+
+        private void handleCur(String s, int low, int high) {
+            while (low >= 0 && high < s.length() && s.charAt(low) == s.charAt(high)) {
+                if (high - low > allHigh - allLow) {
+                    allHigh = high;
+                    allLow = low;
+                }
+                low--;
+                high++;
+            }
+        }
+
+    }
+
+    /**
+     * 这种方式不能很快想出来
+     * 时间复杂度O(len^2)
+     * 空间复杂度O(len^2)
+     * dp
+     * f(i,j): i开始j结尾的子串
+     * f(i,j) = true if and only if f(i+1,j-1)=true and s[i]==s[j]
+     * 错误1：i+1=j时需要判断两个字符串相等时为true
+     * 错误2： corner case，结果中至少有一个字符串
+     */
+    class Solution03 {
+        public String longestPalindrome(String s) {
+            boolean[][] all = new boolean[s.length()][s.length()];
+            String maxSubString = s.substring(0, 1);
+            for (int i = s.length() - 1; i >= 0; i--) {
+                all[i][i] = true;
+                for (int j = i + 1; j < s.length(); j++) {
+                    if (s.charAt(i) == s.charAt(j) && (i + 1 == j || all[i + 1][j - 1])) {
+                        all[i][j] = true;
+                        if (j - i + 1 > maxSubString.length()) {
+                            maxSubString = s.substring(i, j + 1);
+                        }
+                    }
+                }
+            }
+            return maxSubString;
+        }
+
+    }
+
+    /**
+     * 时间复杂度O(n^2)
+     * 空间复杂度O(1)
      * 参考的别人的写法
      * 1 回文可能中间有一个值，可能中间有两个值
      * 2 每次从中间开始向两边延长，如果有比之前更大的值就记录
      * 3 遍历到最后得到最长的值
      */
-    class Solution {
+    class Solution02 {
         public String longestPalindrome(String s) {
             if (s == null || s.length() == 0) {
                 return "";

@@ -13,10 +13,31 @@ import java.util.Map;
  * medium
  */
 public class _0003_LongestCommonPrefix {
+    class Solution {
+        public int lengthOfLongestSubstring(String s) {
+            if (s.length() == 0) {
+                return 0;
+            }
+            Map<Character, Integer> char2Idx = new HashMap<>();
+            int max = 0;
+            int curLow = 0;
+            for (int i = 0; i < s.length(); i++) {
+                if (char2Idx.containsKey(s.charAt(i)) && char2Idx.get(s.charAt(i)) >= curLow) {
+                    curLow = char2Idx.get((s.charAt(i))) + 1;
+                } else {
+                    int cur = i - curLow + 1;
+                    max = Math.max(max, cur);
+                }
+                char2Idx.put(s.charAt(i), i);
+            }
+            return max;
+        }
+    }
+
     /**
      * 第二次写，比上一次的方法更简洁
      */
-    class Solution {
+    class Solution02 {
         public int lengthOfLongestSubstring(String s) {
             if (s == null || s.length() == 0) {
                 return 0;
@@ -32,7 +53,7 @@ public class _0003_LongestCommonPrefix {
                         max = curLength;
                     }
                 } else {
-                    curLength = i - char2Index.get(curValue) ;
+                    curLength = i - char2Index.get(curValue);
                 }
                 char2Index.put(curValue, i);
             }
@@ -63,6 +84,32 @@ public class _0003_LongestCommonPrefix {
                 }
             }
             return prevMaxLength;
+        }
+    }
+
+    /**
+     * 2021.1.23 写的，实现有点复杂
+     */
+    class Solution00 {
+        /**
+         * 只需要保存是否有出现过的元素，同时和旧的最大值相对比
+         */
+        public int lengthOfLongestSubString(String str) {
+            Map<Character, Integer> all = new HashMap<>();
+            int maxLength = 0;
+            int curStart = 0;
+            if (str == null || str.length() == 0) {
+                return 0;
+            }
+            for (int index = 0; index < str.length(); index++) {
+                char curChar = str.charAt(index);
+                if (all.containsKey(curChar) && curStart <= all.get(curChar)) {
+                    curStart = all.get(curChar) + 1;
+                }
+                maxLength = Math.max(maxLength, index - curStart + 1);
+                all.put(curChar, index);
+            }
+            return maxLength;
         }
     }
 }
