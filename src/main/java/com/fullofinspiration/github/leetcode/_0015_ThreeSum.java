@@ -1,11 +1,127 @@
 package com.fullofinspiration.github.leetcode;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class _0015_ThreeSum {
+
+    /**
+     * 结果用set去重
+     * 手误写成i++，应该是j++
+     */
     class Solution {
+        public List<List<Integer>> threeSum(int[] nums) {
+            Set<List<Integer>> rst = new HashSet<>();
+            Arrays.sort(nums);
+            for (int i = 0; i < nums.length - 2; i++) {
+                int j = i + 1, k = nums.length - 1;
+                while (j < k) {
+                    int sum = nums[i] + nums[j] + nums[k];
+                    if (sum == 0) {
+                        rst.add(Arrays.asList(nums[i], nums[j], nums[k]));
+                        j++;
+                        k--;
+                    } else if (sum > 0) {
+                        k--;
+                    } else {
+                        j++;
+                    }
+                }
+            }
+            return new ArrayList<>(rst);
+        }
+    }
+
+    /**
+     * 时间复杂度O(n),排序O(nLogN) 总时间复杂度O(nLogN)
+     * 空间复杂度O(n)
+     * 1 排序
+     * 2 从左到右，从又到左
+     * 3 缓存到一个map中
+     * 该方法会导致遗漏掉一些结果
+     */
+    class WrongSolution01 {
+        public List<List<Integer>> threeSum(int[] nums) {
+            Arrays.sort(nums);
+            List<List<Integer>> all = new ArrayList<>();
+            Map<Integer, Set<Integer>> value2Idx = new HashMap<>();
+            for (int i = 0; i < nums.length; i++) {
+                if (value2Idx.containsKey(nums[i])) {
+                    value2Idx.get(nums[i]).add(i);
+                } else {
+                    HashSet<Integer> idxs = new HashSet<>();
+                    idxs.add(i);
+                    value2Idx.put(nums[i], idxs);
+                }
+            }
+            int i = 0, j = nums.length - 1;
+            while (i < j) {
+                int target = -nums[i] - nums[j];
+                if (value2Idx.containsKey(target)) {
+                    for (int idx : value2Idx.get(target)) {
+                        if (idx > i && idx < j) {
+                            List<Integer> idxs = new ArrayList<>();
+                            idxs.add(nums[i]);
+                            idxs.add(nums[idx]);
+                            idxs.add(nums[j]);
+                            all.add(idxs);
+                        }
+                    }
+                }
+                while (nums[i + 1] == nums[i]) {
+                    i++;
+                }
+                while (nums[j - 1] == nums[j]) {
+                    j--;
+                }
+                i++;
+                j--;
+            }
+            return all;
+        }
+    }
+
+    /**
+     * 时间复杂度O(n^2) 空间复杂度O(n)
+     * 错误1： 保存结果报错错了，保存的是索引，实际应该是值
+     * 错误2： j应该从i+1开始，否则会有重复值
+     * 错误3： 应该是curIDX>j不应该是value>j 这里由于变量明明模糊导致的错误
+     * 错误4： 审题错误，如果有重复值应该跳过 如果通过class去重，会很臃肿，放弃该方法
+     */
+    class WrongSolution00 {
+        public List<List<Integer>> threeSum(int[] nums) {
+            List<List<Integer>> all = new ArrayList<>();
+            Map<Integer, Set<Integer>> value2Idx = new HashMap<>();
+            for (int i = 0; i < nums.length; i++) {
+                if (value2Idx.containsKey(nums[i])) {
+                    value2Idx.get(nums[i]).add(i);
+                } else {
+                    HashSet<Integer> idxs = new HashSet<>();
+                    idxs.add(i);
+                    value2Idx.put(nums[i], idxs);
+                }
+            }
+            for (int i = 0; i < nums.length - 2; i++) {
+                for (int j = i + 1; j < nums.length - 1; j++) {
+                    int value = -nums[i] - nums[j];
+                    if (!value2Idx.containsKey(value)) {
+                        continue;
+                    }
+                    for (int curIdx : value2Idx.get(value)) {
+                        if (curIdx > j) {
+                            ArrayList<Integer> rst = new ArrayList<>();
+                            rst.add(nums[i]);
+                            rst.add(nums[j]);
+                            rst.add(nums[curIdx]);
+                            all.add(rst);
+                        }
+                    }
+                }
+            }
+            return all;
+        }
+    }
+
+    class Solution00 {
         public List<List<Integer>> threeSum(int[] nums) {
             List<List<Integer>> all = new ArrayList<>();
             //可以直接写Arrays.sort
@@ -61,6 +177,7 @@ public class _0015_ThreeSum {
             quickSort(nums, low, left - 1);
             quickSort(nums, left + 1, high);
         }
+
     }
 
     /**
