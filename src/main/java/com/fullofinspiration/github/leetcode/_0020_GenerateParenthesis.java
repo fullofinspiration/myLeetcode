@@ -7,7 +7,63 @@ import java.util.List;
  * generateParenthesis0后面有空再看
  */
 public class _0020_GenerateParenthesis {
+    /**
+     * https://leetcode.com/problems/valid-parentheses/solutions/9178/short-java-solution/?orderBy=most_votes
+     * 更简洁点
+     */
     class Solution {
+        public boolean isValid(String s) {
+            LinkedList<Character> all = new LinkedList<>();
+            for (int i = 0; i < s.length(); i++) {
+                char c = s.charAt(i);
+
+                if (c == '(') {
+                    all.push(')');
+                } else if (c == '[') {
+                    all.push(']');
+                } else if (c == '{') {
+                    all.push('}');
+                } else if (all.isEmpty() || all.pop() != c) {
+                    return false;
+                }
+            }
+            return all.isEmpty();
+
+        }
+    }
+
+    /**
+     * 入栈，然后匹配
+     * 错误1： 异常检测
+     */
+    class Solution01 {
+        public boolean isValid(String s) {
+            LinkedList<Character> all = new LinkedList<>();
+            for (int i = 0; i < s.length(); i++) {
+                char c = s.charAt(i);
+                if (c == '(' || c == '[' || c == '{') {
+                    all.push(c);
+                } else {
+                    if (all.isEmpty()) {
+                        return false;
+                    }
+                    Character pop = all.pop();
+                    if (pop == '(' && c != ')') {
+                        return false;
+                    }
+                    if (pop == '[' && c != ']') {
+                        return false;
+                    }
+                    if (pop == '{' && c != '}') {
+                        return false;
+                    }
+                }
+            }
+            return all.isEmpty();
+        }
+    }
+
+    class Solution00 {
         public boolean isValid(String s) {
             if (s == null || s.length() == 0) {
                 return true;
@@ -32,6 +88,7 @@ public class _0020_GenerateParenthesis {
             }
             return false;
         }
+
         private Character getPair(Character c) {
             if (c.equals(')')) {
                 return '(';
