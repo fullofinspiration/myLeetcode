@@ -4,6 +4,35 @@ package com.fullofinspiration.github.leetcode;
  * hard
  */
 public class _0004_MedianOfTwoSortedArrays {
+  class Solution {
+    public double findMedianSortedArrays(int[] a, int[] b) {
+      int mid1 = (a.length + b.length) / 2;
+      int mid2 = (a.length + b.length - 1) / 2;
+      int res1 = doFindMedian(a, b, mid1);
+      int res2 = doFindMedian(a, b, mid2);
+      return ((double) res1 + res2) / 2;
+    }
+
+    private int doFindMedian(int[] a, int[] b, int targetIdx) {
+      int idx1 = 0, idx2 = 0;
+      while (a.length > idx1 || b.length > idx2) {
+        if (idx1 >= a.length) {
+          return b[targetIdx - a.length];
+        }
+        if (idx2 >= b.length) {
+          return a[targetIdx - b.length];
+        }
+        if (idx1 + idx2 == targetIdx) {
+          return Math.min(a[idx1], b[idx2]);
+        } else if (a[idx1] < b[idx2]) {
+          idx1++;
+        } else {
+          idx2++;
+        }
+      }
+      throw new RuntimeException();
+    }
+  }
 
   /**
    * 太难了看不懂：https://leetcode.com/problems/median-of-two-sorted-arrays/solutions/2471/very-concise-o-log-min-m-n-iterative-solution-with-detailed-explanation/?orderBy=most_votes
@@ -30,7 +59,7 @@ public class _0004_MedianOfTwoSortedArrays {
    * else if aMid-aLow+bMid-bLow > ith  aHigh = aMid-1 bHigh = bMid-1
    * else if aMid-aLow+bMid-bLow < ith
    */
-  class Solution {
+  class Solution01 {
     public double findMedianSortedArrays(int[] a, int[] b) {
       return 0;
     }
