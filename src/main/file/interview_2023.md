@@ -16,7 +16,7 @@
 4 无锁到偏向锁，偏向锁到重量锁转换
 5 aqs原理
 6 什么时候用synchronize，什么时候用aqs
-7 spring ioc使用场景，spring ioc原理
+7 spring aop使用场景，spring aop原理
 8 spring 如何解决循环依赖
 9 单例模式 (双指针)
 10 如何实现一个分布式锁，zk，db，redis如何决定使用哪个锁
