@@ -5,7 +5,36 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class _0022_GenerateParenthesis {
+    /**
+     * 递归，左括号，右括号次数：
+     * 1 若左括号数量等于又括号，同时等于n，插入到结果中
+     * 2 若当前左括号数量等于右括号数量，只能加左括号
+     * 3 加左括号和右括号
+     * 错误1：最多只能有n个左括号和右括号
+     */
     class Solution {
+        private final List<String> res = new ArrayList<>();
+
+        public List<String> generateParenthesis(int n) {
+            doGenerateParenthesis(n, "", 0, 0);
+            return res;
+        }
+
+        private void doGenerateParenthesis(int n, String cur, int left, int right) {
+            if (n == left && left == right) {
+                res.add(cur);
+                return;
+            }
+            if (left < n) {
+                doGenerateParenthesis(n, cur + "(", left + 1, right);
+            }
+            if (left > right) {
+                doGenerateParenthesis(n, cur + ")", left, right + 1);
+            }
+        }
+    }
+
+    class Solution00 {
         public List<String> generateParenthesis(int n) {
             List<String> all = new ArrayList<>();
             LinkedList<Data> datas = new LinkedList<>();
