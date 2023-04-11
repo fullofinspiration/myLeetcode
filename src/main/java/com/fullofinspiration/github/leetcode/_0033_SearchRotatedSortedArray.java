@@ -2,7 +2,96 @@ package com.fullofinspiration.github.leetcode;
 
 
 public class _0033_SearchRotatedSortedArray {
+    /**
+     * 性能差点，如果不存在，每次要遍历所有的值
+     */
     class Solution {
+        public int search(int[] nums, int target) {
+            int low = 0, high = nums.length - 1;
+            while (low <= high) {
+                int mid = (low + high) / 2;
+                if (nums[mid] == target) {
+                    return mid;
+                }
+                if (inRange(nums, low, mid, target)) {
+                    high = mid - 1;
+                } else {
+                    low = mid + 1;
+                }
+            }
+            return -1;
+        }
+
+        private boolean inRange(int[] nums, int low, int high, int target) {
+            if (nums[low] <= nums[high]) {
+                return target >= nums[low] && target <= nums[high];
+            }
+            return !(target > nums[high] && target < nums[low]);
+        }
+    }
+
+    /**
+     * mid=(low+high) / 2
+     * low, mid not exist && mid+1,high {
+     * <p>
+     * }
+     * if nums[low]==target: return idx
+     * if nums[low] < nums[high] && (target < nums[low] || target > nums[high]) return false
+     * if nums[low] > nums[high] && target >high && target < low: return false
+     * if first not exist: 遍历 second
+     * if second not exist: 遍历 first
+     * 错误1： 笔误，notExist（）第4行应该是nums[low] < nums[high],写反了写成了nums[low] > nums[high]
+     * 错误2：只有一个元素时notExist需要判断当前元素是否等于当前值，如果不属于，肯定是不存在的
+     * notExist看起来太抽象了，还是使用inRange来实现
+     */
+    class Solution4 {
+        public int search(int[] nums, int target) {
+            int low = 0, high = nums.length - 1;
+            while (low <= high) {
+                int mid = (low + high) / 2;
+                if (nums[mid] == target) {
+                    return mid;
+                }
+                if (notExist(nums, low, mid, target) && notExist(nums, mid + 1, high, target)) {
+                    return -1;
+                }
+                if (notExist(nums, low, mid, target)) {
+                    low = mid + 1;
+                } else {
+                    high = mid - 1;
+                }
+            }
+            return -1;
+        }
+
+        private boolean notExist(int[] nums, int low, int high, int target) {
+            if (low > high) {
+                return true;
+            }
+            if (nums[low] <= nums[high] && (target < nums[low] || target > nums[high])) {
+                return true;
+            }
+            if (nums[low] > nums[high] && target > nums[high] && target < nums[low]) {
+                return true;
+            }
+            return false;
+        }
+    }
+
+    /**
+     * 1 找到第一个值，该值切分了左边和右边：
+     * 1）比较左右节点，假如left<right 则为left
+     * 2）选取mid，假如mid>left: left=mid+1,否则right=mid-1
+     * 2 分别寻找left和right
+     * 分步有点多，先放弃
+     */
+    class Solution3 {
+        public int search(int[] nums, int target) {
+            return -1;
+        }
+    }
+
+    class Solution2 {
         public int search(int[] nums, int target) {
             int low = 0;
             int high = nums.length - 1;
@@ -11,23 +100,25 @@ public class _0033_SearchRotatedSortedArray {
                 if (nums[mid] == target) {
                     return mid;
                 }
-              boolean inRange = inRange(nums, low, mid, target);
-              if (inRange) {
+                boolean inRange = inRange(nums, low, mid, target);
+                if (inRange) {
                     high = mid - 1;
                 } else {
-                  low = mid + 1;
+                    low = mid + 1;
                 }
             }
             return -1;
         }
+
         private boolean inRange(int[] nums, int low, int high, int target) {
-          System.out.println(String.format("Low: %s, high: %s, target: %s.", low,high, target));
+            System.out.println(String.format("Low: %s, high: %s, target: %s.", low, high, target));
             if (nums[low] <= nums[high]) {
                 return nums[low] <= target && nums[high] >= target;
             }
             return target >= nums[low] || target <= nums[high];
         }
     }
+
     /**
      * 自己写的其他解法有空再看
      */

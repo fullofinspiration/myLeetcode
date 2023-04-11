@@ -1,7 +1,55 @@
 package com.fullofinspiration.github.leetcode;
 
 public class _0034_FirstAndLastPositionOfElementInSortedArray {
+
+    /**
+     * 普通二分查找到target
+     * 最左边：nums[i] == target && (i-1<0 || nums[i-1]<target): return idx
+     * nums[mid]>=target: high=mid-1
+     * 错误1：( (mid == 0) || nums[mid - 1] < target)) 开始写的是mid == 0) || nums[mid - 1] < target，没有加括号括起来，导致mid==0时仍然执行后面语句，最终指针越界
+     * 可优化的点：left的值需要大于等于target right需要小于等于target，这样在不符合条件时可以早点退出
+     */
     class Solution {
+        public int[] searchRange(int[] nums, int target) {
+            int left = findLeft(nums, target);
+            int right = findRight(nums, target);
+            return new int[]{left, right};
+        }
+
+        private int findLeft(int[] nums, int target) {
+            int low = 0, high = nums.length - 1;
+            while (low <= high && nums[low] <= target && nums[high] >= target) {
+                int mid = (low + high) / 2;
+                if (nums[mid] == target && ((mid == 0) || nums[mid - 1] < target)) {
+                    return mid;
+                }
+                if (nums[mid] >= target) {
+                    high = mid - 1;
+                } else {
+                    low = mid + 1;
+                }
+            }
+            return -1;
+        }
+
+        private int findRight(int[] nums, int target) {
+            int low = 0, high = nums.length - 1;
+            while (low <= high && nums[low] <= target && nums[high] >= target) {
+                int mid = (low + high) / 2;
+                if (nums[mid] == target && ((mid == nums.length - 1) || nums[mid + 1] > target)) {
+                    return mid;
+                }
+                if (nums[mid] > target) {
+                    high = mid - 1;
+                } else {
+                    low = mid + 1;
+                }
+            }
+            return -1;
+        }
+    }
+
+    class Solution2 {
         public int[] searchRange(int[] nums, int target) {
             if (nums == null || nums.length == 0) {
                 return new int[]{-1, -1};

@@ -2,12 +2,40 @@ package com.fullofinspiration.github.leetcode;
 
 import java.util.*;
 
-/**
- * 初步想法：回溯法，结果中值是升序排列，
- * 在求值程中，每个结果值是升序排列的,比如(2,3,5)，结果值是8，如果结果是(3,($1),...), $1 >=3 , 不能为2，通过这样来保证终止条件
- */
 public class _0039_CombinationSum {
+    /**
+     * 使用递归的方式
+     * 1：每次看是否等于当前值，如果是，则返回，否则遍历其他
+     */
     class Solution {
+        public List<List<Integer>> combinationSum(int[] candidates, int target) {
+            List<List<Integer>> all = new ArrayList<>();
+            traverse(all, candidates, new ArrayList<>(), target, 0);
+            return all;
+        }
+
+        private void traverse(List<List<Integer>> all, int[] candidates, ArrayList<Integer> tempList, int remain, int idx) {
+            if (remain < 0) {
+                return;
+            }
+            if (remain == 0) {
+                all.add(new ArrayList<>(tempList));
+                return;
+            }
+            for (int i = idx; i < candidates.length; i++) {
+                tempList.add(candidates[i]);
+                traverse(all, candidates, tempList, remain - candidates[i], i);
+                tempList.remove(tempList.size() - 1);
+            }
+        }
+    }
+
+
+    /**
+     * 初步想法：回溯法，结果中值是升序排列，
+     * 在求值程中，每个结果值是升序排列的,比如(2,3,5)，结果值是8，如果结果是(3,($1),...), $1 >=3 , 不能为2，通过这样来保证终止条件
+     */
+    class Solution00 {
         public List<List<Integer>> combinationSum(int[] candidates, int target) {
             if (candidates == null || candidates.length == 0) {
                 return Collections.emptyList();
