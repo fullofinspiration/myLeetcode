@@ -11,7 +11,7 @@ public class _0042_TrappingRainWater {
      * 1)查找每个节点左边最大的节点
      * 2)查找每个节点右边最大的节点
      * 3)遍历每个节点，取minVal = min(leftMax,rightMax),若cur< minVal,则total+=min-cur
-     * 还是一遍过
+     * 空间复杂度O(n),时间复杂度O(n)
      */
     class Solution {
         public int trap(int[] height) {

@@ -4,7 +4,7 @@ import java.util.*;
 
 public class _0039_CombinationSum {
     /**
-     * 使用递归的方式
+     * 暴力法，使用递归的方式
      * 1：每次看是否等于当前值，如果是，则返回，否则遍历其他
      */
     class Solution {
