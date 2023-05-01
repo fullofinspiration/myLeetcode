@@ -2,13 +2,29 @@ package com.fullofinspiration.github.leetcode;
 
 
 public class _0055_JumpGame {
+    class Solution {
+        public boolean canJump(int[] nums) {
+            int curMaxIdx = 0;
+            for (int i = 0; i < nums.length; i++) {
+                if (i > curMaxIdx) {
+                    return false;
+                }
+                curMaxIdx = Math.max(curMaxIdx, i+nums[i]);
+                if (curMaxIdx >=nums.length-1) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
     /**
      * https://leetcode.com/problems/jump-game/solutions/20900/simplest-o-n-solution-with-constant-space/?orderBy=most_votes
      * 找到第一个能跨越上一个节点的值，然后继续找，不需要找到多个这种节点
      * debug问题：
      * 终止条件写错了，应该为小于等于0
      */
-    class Solution {
+    class Solution03 {
         public boolean canJump(int[] nums) {
             int last = nums.length - 1;
             for (int i = nums.length - 2; i >= 0; i--) {

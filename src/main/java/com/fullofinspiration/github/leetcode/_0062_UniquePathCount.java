@@ -5,10 +5,26 @@ import java.util.Arrays;
 
 public class _0062_UniquePathCount {
     /**
+     * f(m)(n) = f(m-1)(n)+ f(m)(n-1)
+     */
+    class Solution {
+        public int uniquePaths(int m, int n) {
+            int[] ints = new int[n];
+            Arrays.fill(ints, 1);
+            for (int i = 1; i < m; i++) {
+                for (int j = 1; j < n; j++) {
+                    ints[j] += ints[j - 1];
+                }
+            }
+            return ints[n - 1];
+        }
+    }
+
+    /**
      * 每次遍历一行，然后遍历第二行 f(m, n) = f(m-1,n)+f(m,n-1),
      * 每次只需要保留长度为n+1的一维数组，arr[0]=0 arr[1...n]=1 每次从前向后遍历curVal[i]+=curVal[i-1]
      */
-    class Solution {
+    class Solution01 {
         public int uniquePaths(int m, int n) {
             int[] ints = new int[n];
             Arrays.fill(ints, 1);

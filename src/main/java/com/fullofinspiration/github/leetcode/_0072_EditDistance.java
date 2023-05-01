@@ -5,6 +5,34 @@ package com.fullofinspiration.github.leetcode;
  */
 public class _0072_EditDistance {
     /**
+     * 错误1：distance[i-1][j-1]也要考虑进去
+     * 错误2： distance[i + 1][j + 1] = distance2+1没有+1
+     */
+    class Solution {
+        public int minDistance(String word1, String word2) {
+            int[][] distance = new int[word1.length() + 1][word2.length() + 1];
+            for (int i = 0; i < distance.length; i++) {
+                distance[i][0] = i;
+            }
+            for (int i = 0; i < distance[0].length; i++) {
+                distance[0][i] = i;
+            }
+            for (int i = 0; i < word1.length(); i++) {
+                for (int j = 0; j < word2.length(); j++) {
+                    if (word1.charAt(i) == word2.charAt(j)) {
+                        distance[i + 1][j + 1] = distance[i][j];
+                        continue;
+                    }
+                    int distance1 = Math.min(distance[i][j + 1], distance[i + 1][j]);
+                    int distance2 = Math.min(distance1, distance[i][j]);
+                    distance[i + 1][j + 1] = distance2+1;
+                }
+            }
+            return distance[word1.length()][word2.length()];
+        }
+    }
+
+    /**
      * https://leetcode.com/problems/edit-distance/solutions/25849/java-dp-solution-o-nm/?orderBy=most_votes
      * 开始想要找到匹配的最长连续子数组，但是需要找到某个相同的子数组的位置，这种方式不需要考虑最终的字符串是怎么样的，
      * 不需要考虑当前是添加还是删除还是修改，只是暴力的取其中的最大值,这样是可以的，暂时不要把简单的问题复杂化，以后有机会再扩展同类的题目
@@ -16,7 +44,7 @@ public class _0072_EditDistance {
      * 1 ： 应该是word1.charAt(i-1) 而不是word1.charAt(i)，注意到原数组索引的影射
      * 2： 应该是min，而不是max
      */
-    class Solution {
+    class Solution00 {
         public int minDistance(String word1, String word2) {
             int m = word1.length();
             int n = word2.length();
