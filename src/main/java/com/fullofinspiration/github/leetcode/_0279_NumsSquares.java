@@ -5,6 +5,21 @@ import java.util.Arrays;
 import java.util.List;
 
 public class _0279_NumsSquares {
+    class Solution {
+        public int numSquares(int n) {
+            int[] all = new int[n + 1];
+            all[0] = 0;
+            for (int i = 1; i < all.length; i++) {
+                all[i]=Integer.MAX_VALUE;
+                for (int j = 1; j * j <= i; j++) {
+                    all[i] = Math.min(all[i], all[i - j * j]);
+                }
+                all[i] += 1;
+            }
+            return all[n];
+        }
+    }
+
     /**
      * 1 取Sqrt(n)
      * 2 square(1), square(2)...square(x) candidates
@@ -19,7 +34,7 @@ public class _0279_NumsSquares {
      * }
      * 5 return mins[n]
      */
-    class Solution {
+    class Solution00 {
         public int numSquares(int n) {
             int val = (int) Math.sqrt(n);
             List<Integer> candidates = new ArrayList<>(val);

@@ -20,5 +20,11 @@ public class _0215_KthLargestElementInArrayTest {
         int kthLargest = SOLUTION.findKthLargest(ints, 4);
         Assert.assertEquals(4, kthLargest);
     }
+    @Test
+    public void testFindKthLargest02() {
+        int[] ints = {1,1,1,1,1,1,1,1,1};
+        int kthLargest = SOLUTION.findKthLargest(ints, 4);
+        Assert.assertEquals(1, kthLargest);
+    }
 
 }

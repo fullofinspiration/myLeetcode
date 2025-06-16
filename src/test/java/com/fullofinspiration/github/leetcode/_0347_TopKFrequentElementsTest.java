@@ -41,10 +41,11 @@ public class _0347_TopKFrequentElementsTest extends TestCase {
         boolean equal = ArrayUtil.equal(expect, actual);
         Assert.assertTrue(equal);
     }
+
     @Test
     public void test04() {
         _0347_TopKFrequentElements.Solution solution = new _0347_TopKFrequentElements().new Solution();
-        int[] actual = solution.topKFrequent(new int[]{-4,1,-1,2,-1,2,3}, 2);
+        int[] actual = solution.topKFrequent(new int[]{-4, 1, -1, 2, -1, 2, 3}, 2);
         int[] expect = new int[]{-1, 2};
         boolean equal = ArrayUtil.equal(expect, actual);
         Assert.assertTrue(equal);

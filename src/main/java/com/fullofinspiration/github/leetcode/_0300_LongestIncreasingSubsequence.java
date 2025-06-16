@@ -6,6 +6,33 @@ import java.util.List;
 
 public class _0300_LongestIncreasingSubsequence {
     /**
+     * https://leetcode.cn/problems/longest-increasing-subsequence/solutions/147667/zui-chang-shang-sheng-zi-xu-lie-by-leetcode-soluti/?envType=study-plan-v2&envId=top-100-liked
+     * 时间复杂度O(n^2)
+     */
+    public class Solution {
+        public int lengthOfLIS(int[] nums) {
+            if (nums == null || nums.length == 0) {
+                return 0;
+            }
+            int max = 1;
+            int[] maxesIncludeCur = new int[nums.length];
+            maxesIncludeCur[0] = 1;
+            for (int i = 1; i < nums.length; i++) {
+                int curMax = 1;
+                int cur = nums[i];
+                for (int j = 0; j < i; j++) {
+                    if (nums[j] < cur) {
+                        curMax = Math.max(curMax, maxesIncludeCur[j] + 1);
+                    }
+                }
+                maxesIncludeCur[i] = curMax;
+                max = Math.max(max, curMax);
+            }
+            return max;
+        }
+    }
+
+    /**
      * https://leetcode.com/problems/longest-increasing-subsequence/discuss/74824/JavaPython-Binary-search-O(nlogn)-time-with-explanation
      * 这个方法有些trick，但是确实符合动态规划的内容，时间复杂度O(nlogn)
      * 动态规划有点靠纯感觉
@@ -14,7 +41,7 @@ public class _0300_LongestIncreasingSubsequence {
      * 过程：找到第一个大于该值的索引，如果不存在，则将该值追加到末尾，如果存在，则tails[i]可以由tails[i-1]和末尾的值来获得,所以可以更新该值，
      * 后边的值由于最小值已经比他大，所以不需要更新
      */
-    public class Solution {
+    public class Solution02 {
         public int lengthOfLIS(int[] nums) {
             int[] tails = new int[nums.length];
             // size这个地方很trick，是即将插入地方的索引，既代表size，有代表即将插入的位置，且该位置的初始值是0，

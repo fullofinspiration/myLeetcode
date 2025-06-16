@@ -4,10 +4,50 @@ package com.fullofinspiration.github.leetcode;
 import java.util.Arrays;
 
 public class _0062_UniquePathCount {
+
+    /**
+     * 空间复杂度较高
+     */
+    class Solution {
+        public int uniquePaths(int m, int n) {
+            int[] paths = new int[n];
+            for (int i = 0; i < paths.length; i++) {
+                paths[i] = 1;
+            }
+            for (int i = 1; i < m; i++) {
+                for (int j = 1; j < n; j++) {
+                    paths[j] += paths[j - 1];
+                }
+            }
+            return paths[n - 1];
+        }
+    }
+
+    /**
+     * 空间复杂度较高
+     */
+    class Solution03 {
+        public int uniquePaths(int m, int n) {
+            int[][] paths = new int[m][n];
+            for (int i = 0; i < paths.length; i++) {
+                paths[i][0] = 1;
+            }
+            for (int j = 0; j < paths[0].length; j++) {
+                paths[0][j] = 1;
+            }
+            for (int i = 1; i < paths.length; i++) {
+                for (int j = 1; j < paths[0].length; j++) {
+                    paths[i][j] = paths[i - 1][j] + paths[i][j - 1];
+                }
+            }
+            return paths[m - 1][n - 1];
+        }
+    }
+
     /**
      * f(m)(n) = f(m-1)(n)+ f(m)(n-1)
      */
-    class Solution {
+    class Solution02 {
         public int uniquePaths(int m, int n) {
             int[] ints = new int[n];
             Arrays.fill(ints, 1);

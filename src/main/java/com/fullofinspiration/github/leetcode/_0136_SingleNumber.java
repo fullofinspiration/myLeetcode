@@ -15,6 +15,16 @@ package com.fullofinspiration.github.leetcode;
 public class _0136_SingleNumber {
     class Solution {
         public int singleNumber(int[] nums) {
+            int ret = 0;
+            for (int num : nums) {
+                ret ^= num;
+            }
+            return ret;
+        }
+    }
+
+    class Solution00 {
+        public int singleNumber(int[] nums) {
             int target = 0;
             for (int num : nums) {
                 target ^= num;

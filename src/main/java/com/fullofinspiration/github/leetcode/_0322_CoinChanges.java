@@ -3,13 +3,36 @@ package com.fullofinspiration.github.leetcode;
 import java.util.Arrays;
 
 public class _0322_CoinChanges {
+    class Solution {
+        public int coinChange(int[] coins, int amount) {
+            int[] ret = new int[amount + 1];
+            ret[0] = 0;
+            for (int i = 1; i < ret.length; i++) {
+                ret[i] = Integer.MAX_VALUE;
+            }
+            for (int i = 1; i <= amount; i++) {
+                for (int coin : coins) {
+                    if (i - coin < 0) {
+                        continue;
+                    }
+                    int idx = i - coin;
+                    if (idx >= 0 && ret[idx] >= 0 && ret[idx] != Integer.MAX_VALUE) {
+                        ret[i] = Math.min(ret[i], ret[idx] + 1);
+                    }
+                }
+            }
+
+            return ret[ret.length - 1] == Integer.MAX_VALUE ? -1 : ret[ret.length - 1];
+        }
+    }
+
 
     /**
      * nums[n] = nums[n-coins] 取其中最大值
      * 错误1 初始值应该是Integer.MAX_VALUE 而不是-1，否则一直是-1
      * 初始值设置成-1，这里极容易出错
      */
-    class Solution {
+    class Solution02 {
         public int coinChange(int[] coins, int amount) {
             int[] rst = new int[amount + 1];
             Arrays.fill(rst, Integer.MAX_VALUE);

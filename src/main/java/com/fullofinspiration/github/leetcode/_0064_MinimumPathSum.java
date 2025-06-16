@@ -5,12 +5,38 @@ import java.util.Arrays;
 
 public class _0064_MinimumPathSum {
     /**
+     * 错了四五个位置
+     */
+    class Solution {
+        public int minPathSum(int[][] grid) {
+            int[][] minSum = new int[grid.length + 1][grid[0].length + 1];
+            for (int i = 0; i < minSum.length; i++) {
+                minSum[i][0] = Integer.MAX_VALUE;
+            }
+            for (int j = 0; j < minSum[0].length; j++) {
+                minSum[0][j] = Integer.MAX_VALUE;
+            }
+
+            for (int i = 1; i < minSum.length; i++) {
+                for (int j = 1; j < minSum[0].length; j++) {
+                    if (i == 1 && j == 1) {
+                        minSum[i][j] = grid[0][0];
+                        continue;
+                    }
+                    minSum[i][j] = Math.min(minSum[i - 1][j], minSum[i][j - 1]) + grid[i-1][j-1];
+                }
+            }
+            return minSum[minSum.length - 1][minSum[0].length - 1];
+        }
+    }
+
+    /**
      * 错误1：返回值应该是 minSum[grid.length ][grid[0].length] 而不是minSum[grid.length -1][grid[0].length]
      * 错误2：最左边应该是Integer.MaxValue，来保证第一次遍历成功
      * 错误3：系统 冷启动时，应该设置左上角数字是grid[i][j]
      * 可以优化的地方：确定起始点时，可以设置minSum[0][1=0]，这样就可以使走上角数字是正确的值
      */
-    class Solution {
+    class Solution01 {
         public int minPathSum(int[][] grid) {
             if (grid == null || grid.length == 0) {
                 return 0;

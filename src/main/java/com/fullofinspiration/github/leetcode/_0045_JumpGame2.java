@@ -1,6 +1,25 @@
 package com.fullofinspiration.github.leetcode;
 
 public class _0045_JumpGame2 {
+    /**
+     * https://leetcode.cn/problems/jump-game-ii/solutions/230241/tiao-yue-you-xi-ii-by-leetcode-solution/comments/2479342/
+     * 这个方法太trick了，i < nums.length-1和使用splitCount作为返回值都很妖
+     */
+    class Solution {
+        public int jump(int[] nums) {
+            int splitCount = 0;
+            int nextMaxIdx=0;
+            int curMaxIdx = 0;
+            for (int i = 0; i < nums.length-1; i++) {
+                nextMaxIdx = Math.max(nextMaxIdx, i+nums[i]);
+                if (i == curMaxIdx) {
+                    curMaxIdx = nextMaxIdx;
+                    splitCount++;
+                }
+            }
+            return splitCount;
+        }
+    }
 
     /**
      * https://leetcode.com/problems/jump-game-ii/solutions/18023/single-loop-simple-java-solution/comments/18012
@@ -9,12 +28,12 @@ public class _0045_JumpGame2 {
      * 错误
      * 原因1：终止条件应该是：i < nums.length-1 而不是 i< nums.length
      */
-    class Solution {
+    class Solution01 {
         public int jump(int[] nums) {
             int prevMax = 0;
             int count = 0;
             int curMax = 0;
-            for (int i = 0; i < nums.length-1; i++) {
+            for (int i = 0; i < nums.length - 1; i++) {
                 curMax = Math.max(curMax, i + nums[i]);
                 if (i == prevMax) {
                     count++;

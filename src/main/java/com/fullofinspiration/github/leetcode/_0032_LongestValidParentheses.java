@@ -5,12 +5,76 @@ import java.util.LinkedList;
 
 public class _0032_LongestValidParentheses {
     /**
+     * 背下来吧，太难理解了
+     * https://leetcode.cn/problems/longest-valid-parentheses/solutions/314683/zui-chang-you-xiao-gua-hao-by-leetcode-solution/?envType=study-plan-v2&envId=top-100-liked
+     */
+    class Solution {
+        public int longestValidParentheses(String s) {
+            if (s.length() == 0) {
+                return 0;
+            }
+            int maxLen = 0;
+            LinkedList<Integer> stack = new LinkedList<>();
+            stack.push(-1);
+            for (int i = 0; i < s.length(); i++) {
+                if (s.charAt(i) == '(') {
+                    stack.push(i);
+                    continue;
+                }
+                stack.pop();
+                if  (stack.isEmpty()) {
+                    stack.push(i);
+                    continue;
+                }
+                maxLen=Math.max(maxLen, i-stack.peek());
+            }
+            return maxLen;
+        }
+    }
+
+    /**
+     * https://leetcode.cn/problems/longest-valid-parentheses/solutions/314683/zui-chang-you-xiao-gua-hao-by-leetcode-solution/?envType=study-plan-v2&envId=top-100-liked
+     * 时间复杂度 O(n)
+     * 空间复杂度O(n)
+     */
+    class Solution02 {
+        public int longestValidParentheses(String s) {
+
+            int[] lengthIncludingCur = new int[s.length()];
+            for (int i = 1; i < s.length(); i++) {
+                char c = s.charAt(i);
+                if (c == '(') {
+                    continue;
+                }
+                if (s.charAt(i - 1) == '(') {
+                    int prevLen = 0;
+                    if (i - 2 > 0) {
+                        prevLen = lengthIncludingCur[i - 2];
+                    }
+                    lengthIncludingCur[i] = prevLen + 2;
+                    continue;
+                }
+                int idx = i - 1 - lengthIncludingCur[i - 1];
+                if (idx >= 0 && s.charAt(idx) == ('(')) {
+                    int prevMaxLength = idx - 1 <= 0 ? 0 : lengthIncludingCur[idx - 1];
+                    lengthIncludingCur[i] = prevMaxLength + 1 + lengthIncludingCur[i - 1] + 1;
+                }
+            }
+            int max = 0;
+            for (int i = 0; i < lengthIncludingCur.length; i++) {
+                max = Math.max(lengthIncludingCur[i], max);
+            }
+            return max;
+        }
+    }
+
+    /**
      * https://leetcode.com/problems/longest-valid-parentheses/solutions/14167/simple-java-solution-o-n-time-one-stack/comments/14579
      * 设置一个节点保存最大值
      * 一个栈，假如是当前是有效的，弹出，计算&更新最大值，否则入栈
      * 注意细节：使用弹出后stack中最新的元素，而不是弹出的元素
      */
-    class Solution {
+    class Solution01 {
         public int longestValidParentheses(String s) {
             LinkedList<Integer> stack = new LinkedList<>();
             int max = 0;

@@ -2,12 +2,29 @@ package com.fullofinspiration.github.leetcode;
 
 
 public class _0070_ClimbingStairs {
+
     class Solution {
+        public int climbStairs(int n) {
+            int prev1 = 1, prev2 = 1;
+            if (n == 1) {
+                return 1;
+            }
+            for (int i = 2; i <= n; i++) {
+                int temp = prev1;
+                prev1 = prev2;
+                prev2 = temp + prev2;
+            }
+            return prev2;
+        }
+    }
+
+    class Solution05 {
+
         public int climbStairs(int n) {
             int first = 1;
             int second = 1;
             for (int i = 2; i <= n; i++) {
-                int cur = first+second;
+                int cur = first + second;
                 first = second;
                 second = cur;
             }

@@ -2,15 +2,55 @@ package com.fullofinspiration.github.leetcode;
 
 
 public class _0055_JumpGame {
+
     class Solution {
+        public boolean canJump(int[] nums) {
+            int curMax = 0;
+            for (int i = 0; i < nums.length; i++) {
+                if (i > curMax) {
+                    return false;
+                }
+                if (i == nums.length - 1) {
+                    return true;
+                }
+                curMax = Math.max(curMax, i + nums[i]);
+            }
+            throw new RuntimeException();
+        }
+    }
+
+    /**
+     * 过于复杂
+     */
+    class Solution05 {
+        public boolean canJump(int[] nums) {
+            int curMax = 0;
+            int nextMax = 0;
+            for (int i = 0; i < nums.length; i++) {
+                if (i == nums.length - 1) {
+                    return true;
+                }
+                nextMax = Math.max(nextMax, i + nums[i]);
+                if (curMax == i) {
+                    if (curMax == nextMax) {
+                        return false;
+                    }
+                    curMax = nextMax;
+                }
+            }
+            return false;
+        }
+    }
+
+    class Solution04 {
         public boolean canJump(int[] nums) {
             int curMaxIdx = 0;
             for (int i = 0; i < nums.length; i++) {
                 if (i > curMaxIdx) {
                     return false;
                 }
-                curMaxIdx = Math.max(curMaxIdx, i+nums[i]);
-                if (curMaxIdx >=nums.length-1) {
+                curMaxIdx = Math.max(curMaxIdx, i + nums[i]);
+                if (curMaxIdx >= nums.length - 1) {
                     return true;
                 }
             }

@@ -7,13 +7,49 @@ import static java.lang.System.*;
  * 20230326 写了两种方法 total 1h
  */
 public class _0005_LongestPalindromicSubstring {
-    /**
-     * 每个节点开始，都向两边遍历，若当前是回文，则记录
-     * 需要注意，有奇数和偶数的回文，两种都需要考虑到
-     */
+
     class Solution {
+        int maxLen, lowIdx4Max;
+
+        public String longestPalindrome(String s) {
+            for (int i = 0; i < s.length(); i++) {
+                findPalindrome(s, i, i);
+                if (i > 0) {
+                    findPalindrome(s, i - 1, i);
+                }
+            }
+            return s.substring(lowIdx4Max, lowIdx4Max + maxLen );
+        }
+
+        private void findPalindrome(String s, int left, int right) {
+            if (s.charAt(left) != s.charAt(right)) {
+                return;
+            }
+            while (s.charAt(left) == s.charAt(right)) {
+                int curLen = right - left + 1;
+                if (curLen > maxLen) {
+                    maxLen = curLen;
+                    lowIdx4Max = left;
+                }
+
+                if (left - 1 < 0 || right + 1 >= s.length()) {
+                    return;
+                }
+                left--;
+                right++;
+            }
+        }
+    }
+
+    class Solution00 {
         int allLow, allHigh;
 
+        /**
+         * 每个节点开始，都向两边遍历，若当前是回文，则记录
+         * 需要注意，有奇数和偶数的回文，两种都需要考虑到
+         * 时间复杂度O(n^2)
+         * 空间复杂度O(1)
+         */
         public String longestPalindrome(String s) {
             if (s.length() == 0) {
                 return "";

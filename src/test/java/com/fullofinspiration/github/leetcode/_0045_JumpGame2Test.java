@@ -18,5 +18,11 @@ public class _0045_JumpGame2Test extends TestCase {
         int rst = solution.jump(new int[]{2, 3, 0, 1, 4});
         Assert.assertEquals(2, rst);
     }
+    @Test
+    public void test02() {
+        _0045_JumpGame2.Solution solution = new _0045_JumpGame2().new Solution();
+        int rst = solution.jump(new int[]{15, 10, 0, 1, 4});
+        Assert.assertEquals(1, rst);
+    }
 
 }

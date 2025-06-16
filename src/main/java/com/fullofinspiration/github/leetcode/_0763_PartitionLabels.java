@@ -4,12 +4,34 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class _0763_PartitionLabels {
+    class Solution {
+        public List<Integer> partitionLabels(String s) {
+            Map<Character, Integer> char2MaxIdx = new HashMap<>();
+            for (int i = 0; i < s.length(); i++) {
+                char c = s.charAt(i);
+                char2MaxIdx.put(c, i);
+            }
+            List<Integer> all = new ArrayList<>();
+            int start = 0, end = 0;
+            while (start < s.length()) {
+                for (int i = start; i <= end; i++) {
+                    Integer idx = char2MaxIdx.get(s.charAt(i));
+                    end = Math.max(end, idx);
+                }
+                all.add(end - start + 1);
+                end += 1;
+                start = end;
+            }
+            return all;
+        }
+    }
+
     /**
      * https://leetcode.com/problems/partition-labels/solutions/1868842/java-c-visually-explaineddddd/?orderBy=most_votes
      * 1 存储最后出现的节点
      * 2 prev=-1, 如果cur==farthest, 增加间隔数量
      */
-    class Solution {
+    class Solution02 {
         public List<Integer> partitionLabels(String s) {
             Map<Character, Integer> char2Idx = new HashMap<>();
             for (int i = 0; i < s.length(); i++) {

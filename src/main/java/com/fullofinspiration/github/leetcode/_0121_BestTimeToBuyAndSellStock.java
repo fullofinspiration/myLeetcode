@@ -3,6 +3,30 @@ package com.fullofinspiration.github.leetcode;
 public class _0121_BestTimeToBuyAndSellStock {
     class Solution {
         public int maxProfit(int[] prices) {
+            if (prices == null || prices.length <= 1) {
+                return 0;
+            }
+            int max = 0;
+            int curLow = prices[0];
+            int curHigh = prices[0];
+            for (int i = 1; i < prices.length; i++) {
+                int cur = prices[i];
+                if (cur < curLow) {
+                    max = Math.max(max, curHigh - curLow);
+                    curLow = cur;
+                    curHigh = cur;
+                    continue;
+                }
+                if (cur > curHigh) {
+                    curHigh = cur;
+                }
+            }
+            return Math.max(max, curHigh-curLow) ;
+        }
+    }
+
+    class Solution01 {
+        public int maxProfit(int[] prices) {
             int preMax = 0;
             int curLow = prices[0];
             for (int i = 1; i < prices.length; i++) {

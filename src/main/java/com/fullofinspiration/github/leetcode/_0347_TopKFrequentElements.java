@@ -5,13 +5,42 @@ import java.util.function.Function;
 
 
 public class _0347_TopKFrequentElements {
+
+    class Solution {
+        public int[] topKFrequent(int[] nums, int k) {
+            Map<Integer, Integer> value2Count = new HashMap<>();
+            for (int num : nums) {
+                value2Count.put(num, value2Count.getOrDefault(num, 0) + 1);
+            }
+            PriorityQueue<int[]> queue = new PriorityQueue<>((a, b) -> a[1] - b[1]);
+            for (Map.Entry<Integer, Integer> entry : value2Count.entrySet()) {
+                Integer value = entry.getKey();
+                Integer count = entry.getValue();
+                if (queue.size() < k) {
+                    queue.offer(new int[]{value, count});
+                    continue;
+                }
+                int[] peek = queue.peek();
+                if (peek[1] < count) {
+                    queue.offer(new int[]{value, count});
+                    queue.poll();
+                }
+            }
+            int[] ret = new int[queue.size()];
+            for (int i = 0; i < ret.length; i++) {
+                ret[i] = queue.poll()[0];
+            }
+            return ret;
+        }
+    }
+
     /**
      * https://leetcode.com/problems/top-k-frequent-elements/solutions/?orderBy=most_votes
      * 1 新建key2freq
      * 2 用bucket sort，idx代表freq，value为list
      * 3 从大到小，如果超过最大长度，则返回结果
      */
-    class Solution {
+    class Solution01 {
         public int[] topKFrequent(int[] nums, int k) {
             Map<Integer, Integer> key2Freq = new HashMap<>();
             for (int num : nums) {

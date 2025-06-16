@@ -39,4 +39,19 @@ public class _0032_LongestValidParenthesesTest extends TestCase {
         int i = solution.longestValidParentheses(")((()))(())(((");
         Assert.assertEquals(10, i);
     }
+
+    @Test
+    public void test05() {
+        _0032_LongestValidParentheses.Solution solution = new _0032_LongestValidParentheses().new Solution();
+        int i = solution.longestValidParentheses("())");
+        Assert.assertEquals(2, i);
+    }
+
+    @Test
+    public void test06() {
+        _0032_LongestValidParentheses.Solution solution = new _0032_LongestValidParentheses().new Solution();
+        int i = solution.longestValidParentheses("(()())");
+        Assert.assertEquals(6, i);
+    }
+
 }
