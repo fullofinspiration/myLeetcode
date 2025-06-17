@@ -1,5 +1,7 @@
 package com.fullofinspiration.github.leetcode;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -7,11 +9,36 @@ import java.util.List;
  * generateParenthesis0后面有空再看
  */
 public class _0020_GenerateParenthesis {
+    class Solution {
+        public boolean isValid(String s) {
+            Deque<Character> all = new ArrayDeque<>();
+            for (char c : s.toCharArray()) {
+                if (c == '(' || c == '[' || c == '{') {
+                    all.push(c);
+                    continue;
+                }
+                if (all.isEmpty()) {
+                    return false;
+                }
+                if (!isPair(all.pop(), c)) {
+                    return false;
+                }
+            }
+            return all.isEmpty();
+        }
+
+        private boolean isPair(char c1, char c2) {
+            return (c1 == '(' && c2 == ')') ||
+                    (c1 == '[' && c2 == ']') ||
+                    (c1 == '{' && c2 == '}');
+        }
+    }
+
     /**
      * https://leetcode.com/problems/valid-parentheses/solutions/9178/short-java-solution/?orderBy=most_votes
      * 更简洁点
      */
-    class Solution {
+    class Solution02 {
         public boolean isValid(String s) {
             LinkedList<Character> all = new LinkedList<>();
             for (int i = 0; i < s.length(); i++) {
