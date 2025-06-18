@@ -53,4 +53,11 @@ public class _0004_MedianOfTwoSortedArraysTest extends TestCase {
     double medianSortedArrays = MEDIAN_OF_TWO_SORTED_ARRAYS.findMedianSortedArrays(first, second);
     Assert.assertEquals(2, medianSortedArrays, DELTA);
   }
+  @Test
+  public void test05() {
+    int[] first = {2,3};
+    int[] second = {1};
+    double medianSortedArrays = MEDIAN_OF_TWO_SORTED_ARRAYS.findMedianSortedArrays(first, second);
+    Assert.assertEquals(2, medianSortedArrays, DELTA);
+  }
 }

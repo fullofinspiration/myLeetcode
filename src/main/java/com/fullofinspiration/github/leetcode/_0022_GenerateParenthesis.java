@@ -6,13 +6,45 @@ import java.util.List;
 
 public class _0022_GenerateParenthesis {
     /**
+     * 开始时间：21：14
+     * 结束时间: 21:28
+     */
+    class Solution {
+        int n;
+        List<String> all = new ArrayList<>();
+
+        public List<String> generateParenthesis(int n) {
+            this.n = n;
+            backtrace("", 0, 0);
+            return all;
+        }
+
+        private void backtrace(String curS, int leftCount, int rightCount) {
+            if (leftCount > n) {
+                return;
+            }
+            if (rightCount > n) {
+                return;
+            }
+            if (curS.length() == n * 2) {
+                all.add(curS);
+                return;
+            }
+            backtrace(curS + "(", leftCount + 1, rightCount);
+            if (leftCount > rightCount) {
+                backtrace(curS + ")", leftCount, rightCount + 1);
+            }
+        }
+    }
+
+    /**
      * 递归，左括号，右括号次数：
      * 1 若左括号数量等于又括号，同时等于n，插入到结果中
      * 2 若当前左括号数量等于右括号数量，只能加左括号
      * 3 加左括号和右括号
      * 错误1：最多只能有n个左括号和右括号
      */
-    class Solution {
+    class Solution01 {
         private final List<String> res = new ArrayList<>();
 
         public List<String> generateParenthesis(int n) {

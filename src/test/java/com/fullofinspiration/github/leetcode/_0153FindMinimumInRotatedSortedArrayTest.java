@@ -28,5 +28,11 @@ public class _0153FindMinimumInRotatedSortedArrayTest {
         assertEquals(11, min);
     }
 
+    @Test
+    public void test03() {
+        int[] ints = {3, 1, 2};
+        int min = SOLUTION.findMin(ints);
+        assertEquals(1, min);
+    }
 
 }

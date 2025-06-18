@@ -4,10 +4,86 @@ import java.util.*;
 
 public class _0039_CombinationSum {
     /**
+     * 开始时间: 22:31
+     * 结束时间: 22:41
+     *
+     */
+    class Solution {
+        List<List<Integer>> rets = new ArrayList<>();
+        ArrayList<Integer> parRet = new ArrayList<>();
+        int[] candidates;
+
+        public List<List<Integer>> combinationSum(int[] candidates, int target) {
+            this.candidates = candidates;
+            backtrace(0, target);
+            return rets;
+        }
+
+        private void backtrace(int idx, int target) {
+            if (target == 0) {
+                rets.add(new ArrayList<>(parRet));
+                return;
+            }
+            if (target < 0) {
+                return;
+            }
+            for (int i = idx; i < candidates.length; i++) {
+                int cur = candidates[i];
+                parRet.add(cur);
+                backtrace(i, target - cur);
+                parRet.remove(parRet.size() - 1);
+            }
+        }
+    }
+
+    /**
+     * 开始时间: 21:29
+     * 结束时间: 22:31
+     * 判断条件太复杂，还原成之前写法
+     */
+    class Solution02 {
+        List<List<Integer>> rets = new ArrayList<>();
+        LinkedList<Integer> parRet = new LinkedList<>();
+        int[] candidates;
+
+        public List<List<Integer>> combinationSum(int[] candidates, int target) {
+            this.candidates = candidates;
+            backtrace(0, target);
+            return rets;
+        }
+
+        private void backtrace(int idx, int target) {
+            if (target == 0) {
+                rets.add(new ArrayList<>(parRet));
+                return;
+            }
+            if (target < 0) {
+                return;
+            }
+            if (idx > candidates.length - 1) {
+                return;
+            }
+            backtrace(idx + 1, target);
+
+            int cur = candidates[idx];
+            int count = 0;
+            while (target - count > 0) {
+                parRet.add(cur);
+                count += cur;
+                backtrace(idx + 1, target - count);
+            }
+            count /= cur;
+            while (count-- > 0) {
+                parRet.removeLast();
+            }
+        }
+    }
+
+    /**
      * 暴力法，使用递归的方式
      * 1：每次看是否等于当前值，如果是，则返回，否则遍历其他
      */
-    class Solution {
+    class Solution01 {
         public List<List<Integer>> combinationSum(int[] candidates, int target) {
             List<List<Integer>> all = new ArrayList<>();
             traverse(all, candidates, new ArrayList<>(), target, 0);
@@ -67,6 +143,7 @@ public class _0039_CombinationSum {
             }
             return all;
         }
+
     }
 
     public static void main(String[] args) {

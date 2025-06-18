@@ -3,6 +3,37 @@ package com.fullofinspiration.github.leetcode;
 import java.util.*;
 
 public class _0017_LetterCombinations {
+    /**
+     * 开始时间:22:43
+     */
+    class Solution {
+        private String digits;
+        private final List<String> rets = new ArrayList<>();
+        String[] mapping = {"0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+
+        public List<String> letterCombinations(String digits) {
+            if (digits.length() == 0) {
+                return new ArrayList<>();
+            }
+            this.digits = digits;
+            backtrace(0, "");
+            return rets;
+        }
+
+        private void backtrace(int i, String cur) {
+            if (cur.length() == digits.length()) {
+                rets.add(cur);
+                return;
+            }
+            if (i > digits.length() - 1) {
+                return;
+            }
+            String all = mapping[digits.charAt(i) - '0'];
+            for (char c : all.toCharArray()) {
+                backtrace(i + 1, cur + c);
+            }
+        }
+    }
 
     /**
      * idx2Str 使用递归
@@ -10,7 +41,7 @@ public class _0017_LetterCombinations {
      * 错误1： 影射关系写错了，idx是digits索引，idx->char->integer
      * 错误2：如果是空字符串，返回空数组
      */
-    class Solution {
+    class Solution02 {
         private String digits;
         private Map<Integer, String> mapping;
         private List<String> rst = new ArrayList<>();
