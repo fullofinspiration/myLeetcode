@@ -4,13 +4,74 @@ import java.util.*;
 
 public class _0078_SubSets {
     /**
+     * 开始时间: 7:00
+     * 结束时间: 7:45
+     * 吃饭20min
+     */
+    class Solution {
+        List<List<Integer>> rets = new ArrayList<>();
+        int[] nums;
+        List<Integer> partRets = new ArrayList<>();
+
+        public List<List<Integer>> subsets(int[] nums) {
+            this.nums = nums;
+            traceback(-1);
+
+            return rets;
+        }
+
+        private void traceback(int idx) {
+            rets.add(new ArrayList<>(partRets));
+            for (int i = idx + 1; i < nums.length; i++) {
+                partRets.add(nums[i]);
+                traceback(i);
+                partRets.remove(partRets.size() - 1);
+            }
+        }
+    }
+
+    /**
+     * 放弃，总是出错
+     */
+    class Solution02 {
+        List<List<Integer>> rets = new ArrayList<>();
+        int[] nums;
+        List<Integer> partRets = new ArrayList<>();
+        boolean[] visited;
+
+        public List<List<Integer>> subsets(int[] nums) {
+            this.nums = nums;
+            visited = new boolean[nums.length];
+            rets.add(new ArrayList<>());
+            traceback(0);
+
+            return rets;
+        }
+
+        private void traceback(int idx) {
+            rets.add(new ArrayList<>(partRets));
+            if (idx >= nums.length) {
+                return;
+            }
+            for (int i = 0; i < nums.length; i++) {
+                if (visited[i]) {
+                    continue;
+                }
+                partRets.add(nums[i]);
+                traceback(idx + 1);
+                partRets.remove(partRets.size() - 1);
+                visited[i] = false;
+            }
+        }
+    }
+
+    /**
      * 回溯，每次增加到结果中
      * 错误
      * 1： 初始idx是-1
      * 2:  结果应该放在new ArrayList中
-     *
      */
-    class Solution {
+    class Solution01 {
         public List<List<Integer>> subsets(int[] nums) {
             if (nums.length == 0) {
                 return Collections.emptyList();
@@ -22,7 +83,7 @@ public class _0078_SubSets {
 
         private void backtrack(List<List<Integer>> all, int[] nums, List<Integer> cur, int idx) {
             all.add(new ArrayList<>(cur));
-            for (int i = idx+1; i < nums.length; i++) {
+            for (int i = idx + 1; i < nums.length; i++) {
                 cur.add(nums[i]);
                 backtrack(all, nums, cur, i);
                 cur.remove(cur.size() - 1);

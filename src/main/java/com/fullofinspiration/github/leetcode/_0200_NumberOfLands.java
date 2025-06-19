@@ -6,6 +6,51 @@ import java.util.Set;
 
 public class _0200_NumberOfLands {
     /**
+     * 开始时间：14:00
+     * 结束时间：14:17
+     */
+    class Solution {
+        private char[][] grid;
+        private int count = 0;
+        private boolean[][] visited;
+
+        public int numIslands(char[][] grid) {
+            this.grid = grid;
+            visited = new boolean[grid.length][grid[0].length];
+            for (int i = 0; i < grid.length; i++) {
+                for (int j = 0; j < grid[0].length; j++) {
+                    if (grid[i][j] == '1' && !visited[i][j]) {
+                        count++;
+                        backtrace(i, j);
+                    }
+                }
+            }
+            return count;
+        }
+
+        private void backtrace(int i, int j) {
+            if (i < 0 || i >= grid.length) {
+                return;
+            }
+            if (j < 0 || j >= grid[0].length) {
+                return;
+            }
+            char c = grid[i][j];
+            if (visited[i][j]) {
+                return;
+            }
+            if (c == '0') {
+                return;
+            }
+            visited[i][j] = true;
+            backtrace(i - 1, j);
+            backtrace(i + 1, j);
+            backtrace(i, j - 1);
+            backtrace(i, j + 1);
+        }
+    }
+
+    /**
      * 新建一个数组，设置每个节点是否被访问过
      * 一个总数量标记当前岛屿数量
      * 从左到右 从上到下:
@@ -15,7 +60,7 @@ public class _0200_NumberOfLands {
      * 穷举过程：
      * 递归的方式，上下左右（必须上下左右，否则有可能漏掉值）
      */
-    class Solution {
+    class Solution02 {
         boolean[][] visited;
 
         public int numIslands(char[][] grid) {

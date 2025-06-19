@@ -61,4 +61,11 @@ public class _0098_ValidateBinarySearchTreeTest {
         assertFalse(validBST);
     }
 
+    @Test
+    public void test05() {
+        TreeNode treeNode2_1 = new TreeNode(2147483647);
+        boolean validBST = SOLUTION.isValidBST(treeNode2_1);
+        assertTrue(validBST);
+    }
+
 }
