@@ -8,6 +8,15 @@ public class _104_MaxiMumDepthOfBinaryTree {
             if (root == null) {
                 return 0;
             }
+            return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
+        }
+    }
+
+    class Solution02 {
+        public int maxDepth(TreeNode root) {
+            if (root == null) {
+                return 0;
+            }
             return Math.max(1 + maxDepth(root.left), 1 + maxDepth(root.right));
         }
     }

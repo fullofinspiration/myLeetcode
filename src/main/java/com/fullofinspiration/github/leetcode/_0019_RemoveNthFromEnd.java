@@ -4,13 +4,30 @@ package com.fullofinspiration.github.leetcode;
 import com.fullofinspiration.github.tool.ListNode;
 
 public class _0019_RemoveNthFromEnd {
+  class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+      ListNode dummy = new ListNode();
+      dummy.next=head;
+      ListNode slow=dummy;
+      ListNode cur = dummy;
+      for (int i=0;i<=n;i++) {
+          cur = cur.next;
+      }
+      while (cur!=null) {
+          slow = slow.next;
+          cur=cur.next;
+      }
+      slow.next= slow.next.next;
+      return dummy.next;
+    }
+  }
   /**
    * 1 双指针，第一个指针先走i步，两个节点一起走， 直到尾节点下一个节点为null
    * 删除第一个节点下一个节点，返回dummy.next
    * 问题1：终止条件应该是quick.next!=null 而不是slow.next != null
    * 问题2：没有将该值移除，只遍历到该元素
    */
-  class Solution {
+  class Solution00 {
     public ListNode removeNthFromEnd(ListNode head, int n) {
       ListNode dummy = new ListNode();
       dummy.next = head;

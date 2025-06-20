@@ -9,8 +9,30 @@ import java.util.LinkedList;
  * @formatter:on
  */
 public class _0101_SymmetricTree {
-
     class Solution {
+        public boolean isSymmetric(TreeNode root) {
+            if (root == null) {
+                return true;
+            }
+            return doIsSymmetric(root.left, root.right);
+
+        }
+
+        private boolean doIsSymmetric(TreeNode left, TreeNode right) {
+            if (left == null && right == null) {
+                return true;
+            }
+            if (left == null || right == null) {
+                return false;
+            }
+            if (left.val != right.val) {
+                return false;
+            }
+            return doIsSymmetric(left.left, right.right) && doIsSymmetric(left.right, right.left);
+        }
+    }
+
+    class Solution00 {
         public boolean isSymmetric(TreeNode root) {
             if (root == null) {
                 return true;
@@ -18,7 +40,7 @@ public class _0101_SymmetricTree {
             if (root.left == null && root.right == null) {
                 return true;
             }
-            if (root.left == null || root.right ==null) {
+            if (root.left == null || root.right == null) {
                 return false;
             }
             if (root.left.val != root.right.val) {

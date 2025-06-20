@@ -4,13 +4,188 @@ import com.fullofinspiration.github.tool.ListNode;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.stream.Collectors;
 
 /**
  * Created by Zhenpeng Zhang on 2021/2/19.
  */
 public class _0148SortList {
-    class Solution {
+    /**
+     * https://leetcode.com/problems/sort-list/solutions/46714/java-merge-sort-solution/
+     */
+    public class Solution {
+        public ListNode sortList(ListNode head) {
+            if (head == null || head.next == null) {
+                return head;
+            }
+            ListNode pre, slow, quick;
+            slow = quick = head;
+            pre = null;
+            while (quick!=null &&quick.next != null) {
+                pre = slow;
+                slow = slow.next;
+                quick = quick.next.next;
+            }
+            if (pre != null) {
+                pre.next = null;
+            }
+
+            ListNode ret1 = sortList(head);
+            ListNode ret2 = sortList(slow);
+            return merge(ret1, ret2);
+        }
+
+        private ListNode merge(ListNode ret1, ListNode ret2) {
+            ListNode dummy = new ListNode();
+            ListNode cur = dummy;
+            while (ret1 != null && ret2 != null) {
+                if (ret1.val <= ret2.val) {
+                    cur.next = ret1;
+                    cur = ret1;
+                    ret1 = ret1.next;
+                } else {
+                    cur.next = ret2;
+                    cur = ret2;
+                    ret2 = ret2.next;
+                }
+            }
+            if (ret1 != null) {
+                cur.next = ret1;
+            } else {
+                cur.next = ret2;
+            }
+            return dummy.next;
+        }
+    }
+
+    /**
+     * https://leetcode.com/problems/sort-list/solutions/46714/java-merge-sort-solution/comments/1779138/?parent=172439
+     */
+    public class Solution01 {
+        public ListNode sortList(ListNode head) {
+            ListNode dummy = new ListNode();
+            dummy.next = head;
+            ListNode[] sublistHeads = new ListNode[2];
+            ListNode[] sublistTails = new ListNode[2];
+            ListNode remains;
+            int step = 1;
+            for (; ; step *= 2) {
+                ListNode prev = dummy;
+                remains = dummy.next;
+                int count = 0;
+                for (; remains != null; count++) {
+                    for (int i = 0; i < 2; i++) {
+                        sublistHeads[i] = remains;
+                        sublistTails[i] = null;
+                        int dataCount = 0;
+                        while (++dataCount <= step && remains != null) {
+                            sublistTails[i] = remains;
+                            remains = remains.next;
+                        }
+                        if (sublistTails[i] != null) {
+                            sublistTails[i].next = null;
+                        }
+                    }
+                    // 合并数组
+                    while (sublistHeads[0] != null && sublistHeads[1] != null) {
+                        if (sublistHeads[0].val >= sublistHeads[1].val) {
+                            prev.next = sublistHeads[1];
+                            prev = sublistHeads[1];
+                            sublistHeads[1] = sublistHeads[1].next;
+                        } else {
+                            prev.next = sublistHeads[0];
+                            prev = sublistHeads[0];
+                            sublistHeads[0] = sublistHeads[0].next;
+                        }
+                    }
+                    if (sublistHeads[0] != null) {
+                        prev.next = sublistHeads[0];
+                        prev = sublistTails[0];
+                    } else {
+                        prev.next = sublistHeads[1];
+                        prev = sublistTails[1];
+                    }
+                }
+                if (count <= 1) {
+                    return dummy.next;
+                }
+            }
+        }
+
+    }
+
+    /**
+     * https://leetcode.com/problems/sort-list/solutions/166324/c++-and-java-legit-solution.-O(nlogn)-time-and-O(1)-space!-No-recursion!-With-detailed-explaination
+     * 迭代方式，时间复杂度O(nlog(n)) 空间复杂度O(1)
+     */
+    public class Solution00 {
+        public ListNode sortList(ListNode head) {
+            // 使用虚拟头节点简化操作
+            ListNode dummy = new ListNode(0);
+            dummy.next = head;
+
+            // 用于暂存分割出的两个子链表及其尾节点
+            ListNode[] subListHeads = new ListNode[2];
+            ListNode[] subListsTails = new ListNode[2];
+
+            // 使用自底向上的归并排序，步长从1开始，每次翻倍
+            for (int step = 1; ; step *= 2) {
+                // prev记录已排序部分的尾节点
+                ListNode prev = dummy;
+
+                // remaining记录待处理部分的头节点
+                ListNode remaining = prev.next;
+
+                int loopCount = 0;
+                // 遍历整个链表进行分割和合并
+                for (; null != remaining; ++loopCount) {
+                    // 分割出两个长度为step的子链表
+                    for (int i = 0; i < 2; ++i) {
+                        subListHeads[i] = remaining;
+                        subListsTails[i] = null;
+                        // 移动指针到子链表的末尾
+                        for (int j = 0; null != remaining && j < step; ++j) {
+                            subListsTails[i] = remaining;
+                            remaining = remaining.next;
+                        }
+                        // 断开子链表与后续节点的连接
+                        if (null != subListsTails[i]) {
+                            subListsTails[i].next = null;
+                        }
+                    }
+
+                    // 合并两个有序子链表
+                    while (null != subListHeads[0] && null != subListHeads[1]) {
+                        if (subListHeads[0].val <= subListHeads[1].val) {
+                            prev.next = subListHeads[0];
+                            subListHeads[0] = subListHeads[0].next;
+                        } else {
+                            prev.next = subListHeads[1];
+                            subListHeads[1] = subListHeads[1].next;
+                        }
+                        prev = prev.next;
+                    }
+
+                    // 将剩余部分连接到已排序部分的末尾
+                    if (null != subListHeads[0]) {
+                        prev.next = subListHeads[0];
+                        prev = subListsTails[0];
+                    } else {
+                        prev.next = subListHeads[1];
+                        prev = subListsTails[1];
+                    }
+                }
+
+                // 如果整个链表在一次循环中就处理完毕，说明排序完成
+                if (1 >= loopCount) {
+                    return dummy.next;
+                }
+            }
+        }
+    }
+
+    class Solution03 {
         public ListNode sortList(ListNode head) {
             if (head == null) {
                 return null;

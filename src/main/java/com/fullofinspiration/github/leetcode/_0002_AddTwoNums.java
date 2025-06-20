@@ -6,6 +6,36 @@ import com.fullofinspiration.github.tool.ListNode;
  * medium
  */
 public class _0002_AddTwoNums {
+    class Solution {
+        public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+            ListNode head = new ListNode();
+            ListNode cur = head;
+            int extra = 0;
+            while (l1 != null || l2 != null || extra != 0) {
+                int count = extra;
+                if (l1 != null) {
+                    count += l1.val;
+                    l1 = l1.next;
+                }
+                if (l2 != null) {
+                    count += l2.val;
+                    l2 = l2.next;
+                }
+                if (count >= 10) {
+                    count -= 10;
+                    extra = 1;
+                } else {
+                    extra = 0;
+                }
+                ListNode listNode = new ListNode(count);
+                cur.next = listNode;
+                cur = listNode;
+
+            }
+            return head.next;
+        }
+    }
+
     /**
      * 麻烦的点：
      * 1 末位开始运算，但是末位是最后一位，用递归的方式好一些
@@ -40,7 +70,7 @@ public class _0002_AddTwoNums {
      * second=second.next;
      * }
      */
-    class Solution {
+    class Solution01 {
         public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
             ListNode dummy = new ListNode();
             ListNode tail = dummy;

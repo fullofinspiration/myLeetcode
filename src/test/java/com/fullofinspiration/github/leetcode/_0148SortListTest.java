@@ -35,4 +35,13 @@ public class _0148SortListTest {
         boolean equal = ListNodeUtil.equal(expect, res);
         assertTrue(equal);
     }
+
+    @Test
+    public void test03() {
+        ListNode listNode = ListNodeUtil.buildListNode(new int[]{-1, 5, 3});
+        ListNode res = SOLUTION.sortList(listNode);
+        ListNode expect = ListNodeUtil.buildListNode(new int[]{-1, 3, 5});
+        boolean equal = ListNodeUtil.equal(expect, res);
+        assertTrue(equal);
+    }
 }

@@ -1,20 +1,53 @@
 package com.fullofinspiration.github.leetcode;
 
 import com.fullofinspiration.github.tool.ListNode;
+
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * 第二道hard题，调试了好久，现场肯定做不出来
- */
+
 public class _0025ReverseNodeInKGroup {
+    class Solution {
+        public ListNode reverseKGroup(ListNode head, int k) {
+            ListNode dummy = new ListNode();
+            ListNode cur = head;
+            ListNode prev = dummy;
+            while (cur != null) {
+                ListNode temp = cur;
+                int remainsCount = 0;
+                while (temp != null) {
+                    remainsCount++;
+                    if (remainsCount >= k) {
+                        break;
+                    }
+                    temp = temp.next;
+                }
+                if (remainsCount < k) {
+                    prev.next = cur;
+                    return dummy.next;
+                }
+
+                int count = k;
+                ListNode curTail = cur;
+                while (--count >= 0 && cur != null) {
+                    ListNode tmp = cur.next;
+                    cur.next = prev.next;
+                    prev.next = cur;
+                    cur = tmp;
+                }
+                prev = curTail;
+            }
+            return dummy.next;
+        }
+    }
 
     /**
+     * 第二道hard题，调试了好久，现场肯定做不出来
+     * <p>
      * 1 注意将尾节点下一个节点设置成null
      * 2 顺序逆序的判断
-     * 3 
      */
-    class Solution {
+    class Solution2 {
         public ListNode reverseKGroup(ListNode head, int batch) {
             if (head == null) {
                 return null;
@@ -55,6 +88,7 @@ public class _0025ReverseNodeInKGroup {
             return dummyHead.next;
         }
     }
+
     class Solution1 {
         public ListNode reverseKGroup(ListNode head, int k) {
             if (head == null) {

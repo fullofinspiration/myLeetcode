@@ -8,6 +8,24 @@ import java.util.List;
 public class _0226_InvertBinaryTree {
     class Solution {
         public TreeNode invertTree(TreeNode root) {
+            doInvertTree(root);
+            return root;
+        }
+
+        private void doInvertTree(TreeNode root) {
+            if (root == null) {
+                return;
+            }
+            TreeNode tmp = root.left;
+            root.left = root.right;
+            root.right = tmp;
+            doInvertTree(root.left);
+            doInvertTree(root.right);
+        }
+    }
+
+    class Solution00 {
+        public TreeNode invertTree(TreeNode root) {
             if (root == null) {
                 return null;
             }
