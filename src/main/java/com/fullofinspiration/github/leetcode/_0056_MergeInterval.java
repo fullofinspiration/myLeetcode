@@ -7,7 +7,28 @@ import java.util.List;
 
 
 public class _0056_MergeInterval {
+    /**
+     * @see _0056_MergeInterval.Solution01
+     */
     class Solution {
+        public int[][] merge(int[][] intervals) {
+            Arrays.sort(intervals, Comparator.comparing(a -> a[0]));
+            List<int[]> all = new ArrayList<>();
+            int[] prev = intervals[0];
+            for (int i = 1; i < intervals.length; i++) {
+                if (prev[1] < intervals[i][0]) {
+                    all.add(prev);
+                    prev = intervals[i];
+                    continue;
+                }
+                prev[1] = Math.max(prev[1], intervals[i][1]);
+            }
+            all.add(prev);
+            return all.toArray(new int[all.size()][2]);
+        }
+    }
+
+    class Solution01 {
         public int[][] merge(int[][] intervals) {
             if (intervals == null || intervals.length == 0) {
                 return intervals;

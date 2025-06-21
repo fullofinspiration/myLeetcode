@@ -13,12 +13,22 @@ import com.fullofinspiration.github.tool.ListNode;
  * }
  */
 public class _0206_ReverseLinkedList {
-    public static void main(String[] args) {
-        _0206_ReverseLinkedList reverseLinkedList = new _0206_ReverseLinkedList();
-        Solution solution = reverseLinkedList.new Solution();
-    }
+
 
     class Solution {
+        public ListNode reverseList(ListNode head) {
+            ListNode dummy = new ListNode();
+            while (head != null) {
+                ListNode tmp = head.next;
+                head.next = dummy.next;
+                dummy.next = head;
+                head = tmp;
+            }
+            return dummy.next;
+        }
+    }
+
+    class Solution00 {
         public ListNode reverseList(ListNode head) {
             if (head == null) {
                 return null;

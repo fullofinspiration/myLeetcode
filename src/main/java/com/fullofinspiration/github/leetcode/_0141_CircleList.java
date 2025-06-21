@@ -8,10 +8,26 @@ import java.util.List;
 import java.util.Set;
 
 public class _0141_CircleList {
+    public class Solution {
+        public boolean hasCycle(ListNode head) {
+            ListNode slow = head, quick = head;
+            while (true) {
+                if (quick == null || quick.next == null) {
+                    return false;
+                }
+                slow = slow.next;
+                quick = quick.next.next;
+                if (slow == quick) {
+                    return true;
+                }
+            }
+        }
+    }
+
     /**
      * https://leetcode.com/problems/linked-list-cycle/solutions/44694/accepted-clean-java-solution/?orderBy=most_votes
      */
-    public class Solution {
+    public class Solution01 {
         public boolean hasCycle(ListNode head) {
             if (head == null) {
                 return false;

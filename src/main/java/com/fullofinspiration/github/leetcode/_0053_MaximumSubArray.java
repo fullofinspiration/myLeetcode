@@ -1,13 +1,28 @@
 package com.fullofinspiration.github.leetcode;
 
 public class _0053_MaximumSubArray {
+    class Solution {
+        public int maxSubArray(int[] nums) {
+            int max = nums[0];
+            int prev = nums[0];
+            for (int i = 1; i < nums.length; i++) {
+                if (prev < 0) {
+                    prev = nums[i];
+                } else {
+                    prev = nums[i] + prev;
+                }
+                max = Math.max(max, prev);
+            }
+            return max;
+        }
+    }
 
     /**
      * 分而治之：
      * max = Math.max(left, right, midLeft+midRight)
      * stackoverflowerror:
      */
-    class Solution {
+    class Solution03 {
         public int maxSubArray(int[] nums) {
             return doGetMaxSubArr(nums, 0, nums.length - 1);
         }

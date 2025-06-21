@@ -5,7 +5,45 @@ import java.util.Collections;
 import java.util.List;
 
 public class _0054_SpiralMatrix {
+    /**
+     * https://leetcode.cn/problems/spiral-matrix/solutions/2362055/54-luo-xuan-ju-zhen-mo-ni-qing-xi-tu-jie-juvi
+     */
     class Solution {
+        public List<Integer> spiralOrder(int[][] matrix) {
+            List<Integer> all = new ArrayList<>();
+            int rowLow = 0, rowHigh = matrix.length - 1;
+            int colLow = 0, colHigh = matrix[0].length - 1;
+            while (true) {
+                for (int j = colLow; j <= colHigh; j++) {
+                    all.add(matrix[rowLow][j]);
+                }
+                if (++rowLow > rowHigh) {
+                    break;
+                }
+                for (int i = rowLow; i <= rowHigh; i++) {
+                    all.add(matrix[i][colHigh]);
+                }
+                if (--colHigh < colLow) {
+                    break;
+                }
+                for (int j = colHigh; j >= colLow; j--) {
+                    all.add(matrix[rowHigh][j]);
+                }
+                if (--rowHigh < rowLow) {
+                    break;
+                }
+                for (int i = rowHigh; i >= rowLow; i--) {
+                    all.add(matrix[i][colLow]);
+                }
+                if (++colLow > colHigh) {
+                    break;
+                }
+            }
+            return all;
+        }
+    }
+
+    class Solution00 {
         public List<Integer> spiralOrder(int[][] matrix) {
             if (matrix == null || matrix.length == 0) {
                 return Collections.emptyList();
