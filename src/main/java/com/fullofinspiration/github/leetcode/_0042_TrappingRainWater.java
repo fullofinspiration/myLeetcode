@@ -1,6 +1,31 @@
 package com.fullofinspiration.github.leetcode;
 
 public class _0042_TrappingRainWater {
+    class Solution {
+        public int trap(int[] height) {
+            if (height == null || height.length == 0) {
+                return 0;
+            }
+            int leftMaxes[] = new int[height.length];
+            int rightMaxes[] = new int[height.length];
+            for (int i = 1; i < height.length; i++) {
+                leftMaxes[i] = Math.max(leftMaxes[i - 1], height[i - 1]);
+            }
+            for (int i = height.length - 2; i >= 0; i--) {
+                rightMaxes[i] = Math.max(rightMaxes[i + 1], height[i + 1]);
+            }
+            int total = 0;
+            for (int i = 0; i < height.length; i++) {
+                int minVal = Math.min(leftMaxes[i], rightMaxes[i]);
+                if (height[i] < minVal) {
+                    total += (minVal - height[i]);
+                }
+
+            }
+            return total;
+        }
+    }
+
     /**
      * 初始想法
      * 遍历每一层：
@@ -13,7 +38,7 @@ public class _0042_TrappingRainWater {
      * 3)遍历每个节点，取minVal = min(leftMax,rightMax),若cur< minVal,则total+=min-cur
      * 空间复杂度O(n),时间复杂度O(n)
      */
-    class Solution {
+    class Solution01 {
         public int trap(int[] height) {
             int curMax = 0;
             int[] leftMax = new int[height.length];

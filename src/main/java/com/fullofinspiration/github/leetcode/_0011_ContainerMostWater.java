@@ -7,10 +7,31 @@ import java.util.Map;
 public class _0011_ContainerMostWater {
 
     /**
+     * https://leetcode.cn/problems/3sum/solutions/284681/san-shu-zhi-he-by-leetcode-solution
+     */
+    class Solution {
+        public int maxArea(int[] height) {
+            int low = 0;
+            int high = height.length - 1;
+            int maxArea = 0;
+            while (low < high) {
+                int area = (high - low) * Math.min(height[low], height[high]);
+                maxArea = Math.max(maxArea, area);
+                if (height[low] < height[high]) {
+                    low++;
+                } else {
+                    high--;
+                }
+            }
+            return maxArea;
+        }
+    }
+
+    /**
      * https://leetcode.com/problems/container-with-most-water/solutions/6100/simple-and-clear-proof-explanation/?orderBy=most_votes
      * m==n的情况下，这两个值只要在，都不可能存在更大的值，此时需要两个值都可以跳过
      */
-    class Solution {
+    class Solution03 {
         public int maxArea(int[] height) {
             int max = Integer.MIN_VALUE;
             int low = 0, high = height.length - 1;

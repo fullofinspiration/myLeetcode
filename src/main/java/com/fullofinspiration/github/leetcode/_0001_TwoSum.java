@@ -7,11 +7,25 @@ import java.util.Map;
  * easy
  */
 public class _0001_TwoSum {
+    class Solution {
+        public int[] twoSum(int[] nums, int target) {
+            Map<Integer, Integer> value2Index = new HashMap<>();
+            for (int i = 0; i < nums.length; i++) {
+                int diff = target-nums[i];
+                if (value2Index.containsKey(diff)) {
+                    return new int[]{i, value2Index.get(diff)};
+                }
+                value2Index.put(nums[i], i);
+            }
+            return new int[]{-1,-1};
+        }
+    }
+
     /**
      * 时间复杂度O(n)
      * 空间复杂度O(n)
      */
-    class Solution {
+    class Solution05 {
         public int[] twoSum(int[] nums, int target) {
             Map<Integer, Integer> value2Index = new HashMap<>();
             for (int i = 0; i < nums.length; i++) {

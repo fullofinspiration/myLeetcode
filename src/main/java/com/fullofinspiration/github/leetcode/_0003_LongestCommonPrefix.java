@@ -3,17 +3,60 @@ package com.fullofinspiration.github.leetcode;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * 1)连续的 2)不重复的，故保存三个数据：
- * 1 用hashmap保存当前遍历时所有元素key2Index，如果元素相同时，保存索引最大的值
- * 2 保存之前最大长度
- * 3 保存当前正在遍历的不重复的低点索引值，
- * 最终通过遍历可以得到最终最长不重复子串长度
- * <p>
- * medium
- */
+
 public class _0003_LongestCommonPrefix {
     class Solution {
+        Map<Character, Integer> char2Count = new HashMap<>();
+
+        public int lengthOfLongestSubstring(String s) {
+            int dupliCount = 0;
+            int start = 0, end = 0;
+            int maxLen = 0;
+            for (; end < s.length(); end++) {
+                char cur = s.charAt(end);
+                handleCount(cur, 1);
+                int count = char2Count.get(cur);
+                if (count == 2) {
+                    dupliCount++;
+                }
+                if (dupliCount == 0) {
+                    int curLen = end - start + 1;
+                    maxLen = Math.max(maxLen, curLen);
+                    continue;
+                }
+
+                for (; dupliCount > 0; start++) {
+                    char startChar = s.charAt(start);
+                    handleCount(startChar, -1);
+                    int startCount = char2Count.get(startChar);
+                    if (startCount == 1) {
+                        dupliCount--;
+                    }
+                }
+            }
+            return maxLen;
+        }
+
+        private void handleCount(char key, int added) {
+            if (!char2Count.containsKey(key)) {
+                char2Count.put(key, added);
+                return;
+            }
+            Integer val = char2Count.get(key);
+            char2Count.put(key, val + added);
+        }
+    }
+
+    /**
+     * 1)连续的 2)不重复的，故保存三个数据：
+     * 1 用hashmap保存当前遍历时所有元素key2Index，如果元素相同时，保存索引最大的值
+     * 2 保存之前最大长度
+     * 3 保存当前正在遍历的不重复的低点索引值，
+     * 最终通过遍历可以得到最终最长不重复子串长度
+     * <p>
+     * medium
+     */
+    class Solution03 {
         public int lengthOfLongestSubstring(String s) {
             if (s.length() == 0) {
                 return 0;

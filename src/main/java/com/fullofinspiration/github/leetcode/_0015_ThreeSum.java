@@ -3,12 +3,50 @@ package com.fullofinspiration.github.leetcode;
 import java.util.*;
 
 public class _0015_ThreeSum {
+    /**
+     * 双指针标准写法：https://leetcode.cn/problems/3sum/solutions/284681/san-shu-zhi-he-by-leetcode-solution
+     */
+    class Solution {
+        public List<List<Integer>> threeSum(int[] nums) {
+            if (nums == null || nums.length == 0) {
+                return Collections.emptyList();
+            }
+            Arrays.sort(nums);
+            List<List<Integer>> rets = new ArrayList<>();
+            for (int i = 0; i < nums.length; i++) {
+                while (i > 0 && i < nums.length - 1 && nums[i] == nums[i - 1]) {
+                    i++;
+                }
+                int target = -nums[i];
+                int l = i + 1, r = nums.length - 1;
+                while (l < r) {
+                    int curSum = nums[l] + nums[r];
+                    if (curSum == target) {
+                        rets.add(Arrays.asList(nums[i], nums[l], nums[r]));
+                        l++;
+                        r--;
+                        while (l < r && nums[l] == nums[l - 1]) {
+                            l++;
+                        }
+                        while (l < r && nums[r] == nums[r + 1]) {
+                            r--;
+                        }
+                    } else if (curSum < target) {
+                        l++;
+                    } else {
+                        r--;
+                    }
+                }
+            }
+            return rets;
+        }
+    }
 
     /**
      * 结果用set去重
      * 手误写成i++，应该是j++
      */
-    class Solution {
+    class Solution01 {
         public List<List<Integer>> threeSum(int[] nums) {
             Set<List<Integer>> rst = new HashSet<>();
             Arrays.sort(nums);

@@ -4,11 +4,69 @@ import java.util.*;
 
 public class _0239_SlidingWindowMaximum {
     /**
+     * @see _0239_SlidingWindowMaximum.Solution00
+     */
+    class Solution {
+        public int[] maxSlidingWindow(int[] nums, int k) {
+            int[] leftMaxes = new int[nums.length];
+            int[] rightMaxes = new int[nums.length];
+            for (int i = 0; i < nums.length; i++) {
+                if (i % k == 0) {
+                    leftMaxes[i] = nums[i];
+                    continue;
+                }
+                leftMaxes[i] = Math.max(nums[i], leftMaxes[i - 1]);
+            }
+            rightMaxes[nums.length - 1] = nums[nums.length - 1];
+            for (int i = nums.length - 2; i >= 0; i--) {
+                if (i % k == 0) {
+                    rightMaxes[i] = nums[i];
+                    continue;
+                }
+                rightMaxes[i] = Math.max(rightMaxes[i], nums[i]);
+            }
+            int[] rets = new int[nums.length - k + 1];
+            for (int i = 0; i < rets.length; i++) {
+                rets[i] = Math.max(rightMaxes[i], leftMaxes[i + k - 1]);
+            }
+            return rets;
+        }
+    }
+
+    /**
+     * @see _0239_SlidingWindowMaximum.Solution02
+     */
+    class Solution03 {
+        public int[] maxSlidingWindow(int[] nums, int k) {
+            if (nums == null || nums.length == 0) {
+                throw new IllegalArgumentException();
+            }
+            if (k > nums.length) {
+                throw new IllegalArgumentException();
+            }
+            List<Integer> all = new ArrayList<>();
+
+            PriorityQueue<int[]> queue = new PriorityQueue<>((a, b) -> b[0] - a[0]);
+            for (int i = 0; i < k - 1; i++) {
+                queue.offer(new int[]{nums[i], i});
+            }
+            for (int i = k - 1; i < nums.length; i++) {
+                queue.offer(new int[]{nums[i], i});
+                while (queue.peek()[1] <= i - k) {
+                    queue.poll();
+                }
+                all.add(queue.peek()[0]);
+            }
+            return all.stream().mapToInt(a -> a).toArray();
+        }
+    }
+
+    /**
      * error：
      * 1） 结果的长度第一次写成了k，应该是nums.length-k+1
      * 2) 第二次遍历应该从k-1开始，并且在取出元素时，需要判断堆是否为空
      */
-    class Solution {
+    class Solution02 {
         public int[] maxSlidingWindow(int[] nums, int k) {
             int[] rst = new int[nums.length - k + 1];
             int idx = 0;
@@ -21,7 +79,7 @@ public class _0239_SlidingWindowMaximum {
             for (int i = 0; i < k - 1; i++) {
                 queue.offer(new int[]{nums[i], i});
             }
-            for (int i = k-1; i < nums.length; i++) {
+            for (int i = k - 1; i < nums.length; i++) {
                 while (!queue.isEmpty() && queue.peek()[1] <= i - k) {
                     queue.poll();
                 }

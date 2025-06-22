@@ -1,6 +1,38 @@
 package com.fullofinspiration.github.leetcode;
 
 public class _0034_FirstAndLastPositionOfElementInSortedArray {
+    /**
+     * https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/solutions/504484/zai-pai-xu-shu-zu-zhong-cha-zhao-yuan-su-de-di-3-4/comments/1989894/
+     */
+    class Solution {
+        public int[] searchRange(int[] nums, int target) {
+            int low = findMid(nums, target, true);
+            int high = findMid(nums, target, false);
+            return new int[]{low, high};
+        }
+
+        private int findMid(int[] nums, int target, boolean backword) {
+            int ret = -1;
+            int low = 0;
+            int high = nums.length - 1;
+            while (low <= high) {
+                int mid = (low + high) / 2;
+                if (nums[mid] == target) {
+                    ret = mid;
+                    if (backword) {
+                        high = mid - 1;
+                    } else {
+                        low = mid + 1;
+                    }
+                } else if (nums[mid] > target) {
+                    high = mid - 1;
+                } else {
+                    low = mid + 1;
+                }
+            }
+            return ret;
+        }
+    }
 
     /**
      * 普通二分查找到target
@@ -9,7 +41,7 @@ public class _0034_FirstAndLastPositionOfElementInSortedArray {
      * 错误1：( (mid == 0) || nums[mid - 1] < target)) 开始写的是mid == 0) || nums[mid - 1] < target，没有加括号括起来，导致mid==0时仍然执行后面语句，最终指针越界
      * 可优化的点：left的值需要大于等于target right需要小于等于target，这样在不符合条件时可以早点退出
      */
-    class Solution {
+    class Solution3 {
         public int[] searchRange(int[] nums, int target) {
             int left = findLeft(nums, target);
             int right = findRight(nums, target);
