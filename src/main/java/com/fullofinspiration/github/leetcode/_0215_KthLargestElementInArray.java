@@ -7,6 +7,10 @@ public class _0215_KthLargestElementInArray {
      * https://leetcode.cn/problems/kth-largest-element-in-an-array/solutions/307351/shu-zu-zhong-de-di-kge-zui-da-yuan-su-by-leetcod-2/comments/3022429/
      */
     class Solution {
+        public int findKthLargest(int[] nums, int k) {
+            return doFindKthLargest(nums, 0, nums.length - 1, nums.length - k);
+        }
+
         private int doFindKthLargest(int[] nums, int left, int right, int k) {
             if (left == right) {
                 return nums[left];
@@ -37,9 +41,7 @@ public class _0215_KthLargestElementInArray {
             nums[j] = tmp;
         }
 
-        public int findKthLargest(int[] nums, int k) {
-            return doFindKthLargest(nums, 0, nums.length - 1, nums.length - k);
-        }
+
     }
 
     class Solution00 {
